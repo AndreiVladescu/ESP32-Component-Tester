@@ -1,111 +1,56 @@
+from conf import *
 from machine import Pin, ADC
 from time import sleep
+import network
+import socket
+import select
 
-## Pin definitions
-adc_tp1, adc_tp2, adc_tp3 = 39, 34, 35
-tp1_pins = [32, 33, 25]
-tp2_pins = [26, 27, 14]
-tp3_pins = [12, 13, 15]
+def connect_wifi(ssid, password):
+    wlan = network.WLAN(network.STA_IF)  # Create a station interface
+    wlan.active(True)  # Activate the station interface
+    if not wlan.isconnected():  # Check if already connected
+        debug('Connecting to WiFi...')
+        wlan.connect(ssid, password)  # Connect to the WiFi network
+        while not wlan.isconnected():  # Wait for connection
+            pass
+    debug('Connected to WiFi:' + ssid)
+    debug('IP address:' + wlan.ifconfig()[0])  # Print the IP address
+    
+def handle_request(conn):
+    # Generate dynamic content based on some condition or data
+    dynamic_content = "<h1>Dynamic Content</h1>"
+    # You can add more dynamic content generation logic here
+    
+    # HTTP response
+    response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n" + dynamic_content
+    
+    conn.send(response)  # Send the HTTP response
+    conn.close()  # Close the connection
+    
+def start_server():
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # Create a TCP/IP socket
+    s.bind(('0.0.0.0', 80))  # Bind the socket to address and port
+    s.listen(5)  # Listen for incoming connections
 
-## Variable definitions
-debug_check = True
-esp32_driving_pin_resistance = 40
+    debug("Server started. Waiting for connections...")
 
-class TestPoint:
-    def __init__(self, adc_pin, r0_pin, r1_pin, r2_pin, name):
-            
-        self.name = name
+    inputs = [s]  # List of input sockets including the server socket
+
+    while True:
+        readable, _, _ = select.select(inputs, [], [])  # Select readable sockets
+
+        for sock in readable:
+            if sock is s:  # If the server socket is readable, accept new connection
+                conn, addr = s.accept()  # Accept a connection
+                debug("Connection from:" + str(addr))
+                inputs.append(conn)  # Add the new connection to the list of inputs
+            else:  # If a client socket is readable, handle the request
+                request = sock.recv(1024)  # Receive data from the client
+                debug("Request:" + str(request))
+                handle_request(sock)
+                inputs.remove(sock)  # Remove the client socket from the list of inputs
+
         
-        self.adc_pin = adc_pin
-        self.r0_pin = r0_pin
-        self.r1_pin = r1_pin
-        self.r2_pin = r2_pin
-
-        self.adc = ADC(Pin(adc_pin))
-        self.adc.atten(ADC.ATTN_11DB)
-
-        self.r0 = Pin(r0_pin, Pin.IN)
-        self.r1 = Pin(r1_pin, Pin.IN)
-        self.r2 = Pin(r2_pin, Pin.IN)
-        self.r0_status = 0
-        self.r1_status = 0
-        self.r2_status = 0
-
-    def get_uv(self):
-        return self.adc.read_uv()
-
-    def get_v(self):
-        return self.get_uv() / 10**6
-
-    def get_status(self):
-        return 'R0: {0}, R1: {1}, R2: {2}'.format(self.r0_status, self.r1_status, self.r2_status)
-    
-    def get_name(self):
-        return self.name
-    
-    def set_r0_high(self):
-        self.r0 = Pin(self.r0_pin, Pin.OUT)
-        self.r0.on()
-        self.r0_status = 1
-        self.set_r1_floating()
-        self.set_r2_floating()
-
-    def set_r0_low(self):
-        self.r0 = Pin(self.r0_pin, Pin.OUT)
-        self.r0.off()
-        self.r0_status = -1
-        self.set_r1_floating()
-        self.set_r2_floating()
-
-    def set_r0_floating(self):
-        self.r0_status = 0
-        self.r0 = Pin(self.r0_pin, Pin.IN)
-
-    def set_r1_high(self):
-        self.r1 = Pin(self.r1_pin, Pin.OUT)
-        self.r1.on()
-        self.r1_status = 1
-        self.set_r0_floating()
-        self.set_r2_floating()
-
-    def set_r1_low(self):
-        self.r1 = Pin(self.r1_pin, Pin.OUT)
-        self.r1.off()
-        self.r1_status = -1
-        self.set_r0_floating()
-        self.set_r2_floating()
-
-    def set_r1_floating(self):
-        self.r1_status = 0
-        self.r1 = Pin(self.r1_pin, Pin.IN)
-
-    def set_r2_high(self):
-        self.r2 = Pin(self.r2_pin, Pin.OUT)
-        self.r2.on()
-        self.r2_status = 1
-        self.set_r1_floating()
-        self.set_r2_floating()
-
-    def set_r2_low(self):
-        self.r2 = Pin(self.r2_pin, Pin.OUT)
-        self.r2.off()
-        self.r2_status = -1
-        self.set_r1_floating()
-        self.set_r2_floating()
-
-    def set_r2_floating(self):
-        self.r2_status = 0
-        self.r2 = Pin(self.r2_pin, Pin.IN)
-
-
-tp1, tp2, tp3 = None, None, None
-
-## Aux functions
-def debug(message):
-    if debug_check:
-        print('$ ' + message)
-
-
 def init_pins():
     global tp1, tp2, tp3
     # Test point 1/A
@@ -121,8 +66,8 @@ def measure_resistance_680(tp_x, tp_y):
     tp_y.set_r1_high()
     sleep(0.001)
     debug('680 Low Impedance Test')
-    debug('Low-side {0}: {1}'.format(tp_x.get_name(), tp_x.get_v()))
-    debug('High-side {0}: {1}'.format(tp_y.get_name(), tp_y.get_v()))
+    debug('Low-side {0}: {1} v'.format(tp_x.get_name(), tp_x.get_v()))
+    debug('High-side {0}: {1} v'.format(tp_y.get_name(), tp_y.get_v()))
     average_current_tpx = 0
     average_current_tpy = 0
     for i in range(0, 9):
@@ -131,9 +76,14 @@ def measure_resistance_680(tp_x, tp_y):
     
     average_current_tpx = average_current_tpx / 10
     average_current_tpy = average_current_tpy / 10
+        
+    debug('Average tpx: {0} uv'.format(average_current_tpx))
+    debug('Average tpy: {0} uv'.format(average_current_tpy))
     
-    debug('Average tpx: {0}'.format(average_current_tpx))
-    debug('Average tpy: {0}'.format(average_current_tpy))
+    # R = U/I
+    # 680 ohms for low resistance test, + 
+    resistance = 3.3 / average_current_tpx - 680 - esp32_driving_pin_resistance
+    print(resistance)
     
 def measure_resistance_470k(tp_x, tp_y):
     tp_x.set_r0_low()
@@ -146,7 +96,6 @@ def measure_resistance_470k(tp_x, tp_y):
 def measure_resistance():
     global tp1, tp2, tp3
     measure_resistance_680(tp1, tp2)
-    return
     measure_resistance_680(tp2, tp1)
     measure_resistance_470k(tp1, tp2)
     measure_resistance_470k(tp2, tp1)
@@ -155,6 +104,12 @@ def measure_phase():
     measure_resistance()
 
 def main():
+    connect_wifi('DEV', '%yE+Tr_4hru87Kx4')
+    
+    start_server()
+
+    debug("###################\n$ ## WiFi Pass: OK ##\n$ ###################\n$")
+    
     init_pins()
     debug("###################\n$ ## Init Pass: OK ##\n$ ###################\n$")
 
