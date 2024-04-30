@@ -27,16 +27,16 @@ def handle_request(conn):
         template_content = file.read()
         
     dynamic_data = {
-        'tp1_v': tp1.get_v() + " " + tp1.get_status(),
-        'tp2_v': tp2.get_v() + " " + tp2.get_status(),
-        'tp3_v': tp3.get_v() + " " + tp3.get_status(),
+        'tp1_v': str(tp1.get_v()) + " " + tp1.get_status(),
+        'tp2_v': str(tp2.get_v()) + " " + tp2.get_status(),
+        'tp3_v': str(tp3.get_v()) + " " + tp3.get_status(),
     }
     
     rendered_content = template_content.format(**dynamic_data)
     
     response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n" + rendered_content
     
-    conn.send(response)  # Send the HTTP response
+    conn.send(response.encode())  # Send the HTTP response
     conn.close()  # Close the connection
     
 def start_server():
