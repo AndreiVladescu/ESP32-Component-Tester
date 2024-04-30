@@ -61,7 +61,7 @@ def start_server():
                 debug("Request:" + str(request))
                 handle_request(sock)
                 inputs.remove(sock)  # Remove the client socket from the list of inputs
-        time.sleep(1)  # Wait for 1 second before checking for new connections
+        sleep(1)  # Wait for 1 second before checking for new connections
         
 def init_pins():
     global tp1, tp2, tp3
@@ -80,21 +80,23 @@ def measure_resistance_680(tp_x, tp_y):
     debug('680 Low Impedance Test')
     debug('Low-side {0}: {1} v'.format(tp_x.get_name(), tp_x.get_v()))
     debug('High-side {0}: {1} v'.format(tp_y.get_name(), tp_y.get_v()))
-    average_current_tpx = 0
-    average_current_tpy = 0
+    adc_tpx = 0
+    adc_tpy = 0
+    
     for i in range(0, 9):
-        average_current_tpx = tp_x.get_uv()
-        average_current_tpy = tp_y.get_uv()
+        adc_tpx += tp_x.get_v()
+        adc_tpy += tp_y.get_v()
     
-    average_current_tpx = average_current_tpx / 10
-    average_current_tpy = average_current_tpy / 10
-        
-    debug('Average tpx: {0} uv'.format(average_current_tpx))
-    debug('Average tpy: {0} uv'.format(average_current_tpy))
+    adc_tpx = adc_tpx / 10
+    adc_tpy = adc_tpy / 10
+    # Sanity check:
+    # 1.95 / 0.075 * 40 - 40 = 1k
+    adc_tpx = 0.075
+    adc_tpy = 1.95
+    debug('Average voltage tpx: {0} v'.format(adc_tpx))
+    debug('Average voltage tpy: {0} v'.format(adc_tpy))
     
-    # R = U/I
-    # 680 ohms for low resistance test, + 
-    resistance = 3.3 / average_current_tpx - 680 - esp32_driving_pin_resistance
+    resistance = adc_tpy/adc_tpx * esp32_driving_pin_resistance - esp32_driving_pin_resistance
     print(resistance)
     
 def measure_resistance_470k(tp_x, tp_y):
