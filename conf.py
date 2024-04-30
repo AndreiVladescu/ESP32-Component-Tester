@@ -11,7 +11,6 @@ tp3_pins = [12, 13, 15]
 debug_check = True
 esp32_driving_pin_resistance = 40
 
-tp1, tp2, tp3 = None, None, None
 
 ## Aux functions
 def debug(message):
@@ -103,4 +102,3 @@ class TestPoint:
     def set_r2_floating(self):
         self.r2_status = 0
         self.r2 = Pin(self.r2_pin, Pin.IN)
-

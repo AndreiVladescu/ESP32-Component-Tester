@@ -1,10 +1,67 @@
 from conf import *
-from web_service import *
 
 from machine import Pin, ADC
 from time import sleep
 import _thread
+import network
+import socket
+import select
+
+tp1, tp2, tp3 = None, None, None
+
+def connect_wifi(ssid, password):
+    wlan = network.WLAN(network.STA_IF)  # Create a station interface
+    wlan.active(True)  # Activate the station interface
+    if not wlan.isconnected():  # Check if already connected
+        debug('Connecting to WiFi...')
+        wlan.connect(ssid, password)  # Connect to the WiFi network
+        while not wlan.isconnected():  # Wait for connection
+            pass
+    debug('Connected to WiFi:' + ssid)
+    debug('IP address:' + wlan.ifconfig()[0])  # Print the IP address
+    
+def handle_request(conn):
+    template_content  = ""
+    
+    with open('template.html', 'r') as file:
+        template_content = file.read()
         
+    dynamic_data = {
+        'tp1_v': tp1.get_v() + " " + tp1.get_status(),
+        'tp2_v': tp2.get_v() + " " + tp2.get_status(),
+        'tp3_v': tp3.get_v() + " " + tp3.get_status(),
+    }
+    
+    rendered_content = template_content.format(**dynamic_data)
+    
+    response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n" + rendered_content
+    
+    conn.send(response)  # Send the HTTP response
+    conn.close()  # Close the connection
+    
+def start_server():
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # Create a TCP/IP socket
+    s.bind(('0.0.0.0', 80))  # Bind the socket to address and port
+    s.listen(5)  # Listen for incoming connections
+
+    debug("Server started. Waiting for connections...")
+
+    inputs = [s]  # List of input sockets including the server socket
+
+    while True:
+        readable, _, _ = select.select(inputs, [], [])  # Select readable sockets
+
+        for sock in readable:
+            if sock is s:  # If the server socket is readable, accept new connection
+                conn, addr = s.accept()  # Accept a connection
+                debug("Connection from:" + str(addr))
+                inputs.append(conn)  # Add the new connection to the list of inputs
+            else:  # If a client socket is readable, handle the request
+                request = sock.recv(1024)  # Receive data from the client
+                debug("Request:" + str(request))
+                handle_request(sock)
+                inputs.remove(sock)  # Remove the client socket from the list of inputs
+
 def init_pins():
     global tp1, tp2, tp3
     # Test point 1/A
@@ -58,18 +115,19 @@ def measure_phase():
     measure_resistance()
 
 def main():
+    init_pins()
+    debug("###################\n$ ## Init Pass: OK ##\n$ ###################\n$")
+
     connect_wifi('DEV', '%yE+Tr_4hru87Kx4')
     
     _thread.start_new_thread(start_server, ())
     
     debug("###################\n$ ## WiFi Pass: OK ##\n$ ###################\n$")
     
-    init_pins()
-    debug("###################\n$ ## Init Pass: OK ##\n$ ###################\n$")
-
     measure_phase()
     
     debug("\n$ ##########################\n$ ## Measurement Pass: OK ##\n$ ##########################\n$ ")
 
 if __name__ == "__main__":
     main()
+
