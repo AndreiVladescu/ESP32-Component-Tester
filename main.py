@@ -61,7 +61,8 @@ def start_server():
                 debug("Request:" + str(request))
                 handle_request(sock)
                 inputs.remove(sock)  # Remove the client socket from the list of inputs
-
+        time.sleep(1)  # Wait for 1 second before checking for new connections
+        
 def init_pins():
     global tp1, tp2, tp3
     # Test point 1/A
