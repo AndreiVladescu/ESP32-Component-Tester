@@ -83,7 +83,7 @@ def measure_resistance_680(tp_x, tp_y):
     adc_tpx = 0
     adc_tpy = 0
     
-    for i in range(0, 9):
+    for i in range(0, 10):
         adc_tpx += tp_x.get_v()
         adc_tpy += tp_y.get_v()
     
@@ -91,8 +91,8 @@ def measure_resistance_680(tp_x, tp_y):
     adc_tpy = adc_tpy / 10
     # Sanity check:
     # 1.95 / 0.075 * 40 - 40 = 1k
-    adc_tpx = 0.075
-    adc_tpy = 1.95
+    #adc_tpx = 0.075
+    #adc_tpy = 1.95
     debug('Average voltage tpx: {0} v'.format(adc_tpx))
     debug('Average voltage tpy: {0} v'.format(adc_tpy))
     
