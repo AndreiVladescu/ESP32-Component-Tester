@@ -164,10 +164,10 @@ def rx_serial_thread():
     
     while True:
         if rx_ch.poll(0): #is data available? .poll(0) returns an empty list if no data is available
-        res = ""
-        while rx_ch.poll(1):
-            res+=(sys.stdin.read(1))
-        print("got:",res)
+            res = ""
+            while rx_ch.poll(1):
+                res+=(sys.stdin.read(1))
+            print("got:",res)
         sleep(1)
 
 def tx_serial_thread():
@@ -317,6 +317,7 @@ def measure_phase():
         None
     """
     measure_resistance()
+    measure_capacitance()
 
 def main():
     """
