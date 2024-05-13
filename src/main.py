@@ -248,18 +248,67 @@ def measure_resistance_470k(tp_x, tp_y):
     debug('High-side {0}: {1}'.format(tp_y.get_name(), tp_y.get_v()))
 
 def measure_resistance():
-    """
-    Measures the resistance using different test configurations.
-
-    Returns:
-        None
-    """
     global tp1, tp2, tp3
     measure_resistance_680(tp1, tp2)
     measure_resistance_680(tp2, tp1)
     measure_resistance_470k(tp1, tp2)
     measure_resistance_470k(tp2, tp1)
+
+def capacitor_discharge(tp_x, tp_y):
+    # Safety pin check they are floating
+    tp_x.set_r0_floating()
+    tp_y.set_r0_floating()
+    tp_x.set_r1_floating()
+    tp_y.set_r1_floating()
+    tp_x.set_r2_floating()
+    tp_y.set_r2_floating()
+
+    # Testing if the would-be capacitor has any charge left
+    cap_voltage_x = tp_x.get_v()
+    cap_voltage_y = tp_y.get_v()
     
+    cap_threshold_voltage = 1.3
+
+    if cap_voltage_x > cap_threshold_voltage or cap_voltage_y > cap_threshold_voltage:
+        debug('Capacitor has big charge. Discharge it with a screwdriver')
+        return
+
+    debug('Capacitor has a small charge. Short the pins')
+    # Pin shorting through the 680 Ohm resistor
+    tp_x.set_r0_low()
+    tp_y.set_r1_low()
+    sleep(0.05)
+
+def measure_capacitance_test(tp_x, tp_y):
+    capacitor_discharge(tp_x, tp_y)
+    
+    # Charge the pins for some time
+    tp_x.set_r0_low()
+    tp_y.set_r1_high()
+    sleep(0.01)  # Adjust the charging time as needed
+    
+    # Measure the voltage after charging
+    voltage_x = tp_x.get_v()
+    voltage_y = tp_y.get_v()
+    
+    # Check if the voltage has changed significantly
+    voltage_threshold = 0.1  # Adjust the threshold as needed
+    if abs(voltage_x - voltage_y) > voltage_threshold:
+        debug('Capacitor detected!')
+        
+        # Calculate the capacitance using the voltage and charging time
+        capacitance = 0 # ?????
+        
+        debug('Capacitance: {0} F'.format(capacitance))
+    else:
+        debug('No capacitor detected.')
+
+
+def measure_capacitance():
+    global tp1, tp2, tp3
+    measure_capacitance_test(tp1, tp2)
+    measure_capacitance_test(tp2, tp1)
+
 def measure_phase():
     """
     Measures the resistance.
