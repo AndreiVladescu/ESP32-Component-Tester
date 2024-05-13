@@ -121,11 +121,12 @@ def main():
     init_pins()
     debug("###################\n$ ## Init Pass: OK ##\n$ ###################\n$")
 
-    connect_wifi('DEV', '%yE+Tr_4hru87Kx4')
+    if wifi_enabled:
+        connect_wifi('DEV', '%yE+Tr_4hru87Kx4')
+        
+        _thread.start_new_thread(start_server, ())
     
-    _thread.start_new_thread(start_server, ())
-    
-    debug("###################\n$ ## WiFi Pass: OK ##\n$ ###################\n$")
+        debug("###################\n$ ## WiFi Pass: OK ##\n$ ###################\n$")
     
     measure_phase()
     

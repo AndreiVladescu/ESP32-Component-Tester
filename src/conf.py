@@ -10,7 +10,7 @@ tp3_pins = [12, 13, 15]
 ## Variable definitions
 debug_check = True
 esp32_driving_pin_resistance = 40
-
+wifi_enabled = True
 
 ## Aux functions
 def debug(message):
