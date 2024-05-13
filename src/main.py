@@ -10,6 +10,7 @@ import ujson
 import uos
 import _thread
 import select
+import sys
 
 rx_ch = select.poll() # new select object
 rx_ch.register(sys.stdin) # register the stdin file descriptor
