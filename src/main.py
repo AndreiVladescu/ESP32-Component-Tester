@@ -8,6 +8,11 @@ import socket
 import select
 import ujson
 import uos
+import _thread
+import select
+
+rx_ch = select.poll() # new select object
+rx_ch.register(sys.stdin) # register the stdin file descriptor
 
 tp1, tp2, tp3 = None, None, None
 
@@ -152,7 +157,28 @@ def start_server():
                 handle_request(sock)
                 inputs.remove(sock)  # Remove the client socket from the list of inputs
         sleep(1)  # Wait for 1 second before checking for new connections
-        
+
+def rx_serial_thread():
+    global rx_ch
+    
+    while True:
+        if rx_ch.poll(0): #is data available? .poll(0) returns an empty list if no data is available
+        res = ""
+        while rx_ch.poll(1):
+            res+=(sys.stdin.read(1))
+        print("got:",res)
+        sleep(1)
+
+def tx_serial_thread():
+    while True:
+        # TODO serial comms
+        sleep(1)
+
+def init_serial():
+    _thread.start_new_thread(rx_serial_thread, ())
+    _thread.start_new_thread(tx_serial_thread, ())
+
+
 def init_pins():
     """
     Initializes the test points (tp1, tp2, tp3) with their respective ADC channels and pin configurations.
@@ -252,6 +278,9 @@ def main():
     init_pins()
     debug("###################\n$ ## Init Pass: OK ##\n$ ###################\n$")
 
+    init_serial()
+    debug("\n$ ###########################\n$ ## Serial Comms Pass: OK ##\n$ ###########################\n$ ")
+
     if wifi_enabled:
         init_wifi()
         
@@ -261,4 +290,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
 

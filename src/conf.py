@@ -19,9 +19,21 @@ def debug(message):
         
 class TestPoint:
     def __init__(self, adc_pin, r0_pin, r1_pin, r2_pin, name):
-            
+        """
+        Initialize the Test Point (Pin) object.
+
+        Args:
+            adc_pin (int): The ADC pin number.
+            r0_pin (int): The pin number for the shunted pin.
+            r1_pin (int): The pin number for the 680 ohm resistor.
+            r2_pin (int): The pin number for the 470k ohm resistor.
+            name (str): The name of the Test Point (Pin).
+
+        Returns:
+            None
+        """
         self.name = name
-        
+
         self.adc_pin = adc_pin
         self.r0_pin = r0_pin
         self.r1_pin = r1_pin
