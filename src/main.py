@@ -204,30 +204,47 @@ def measure_resistance_680(tp_x, tp_y):
     Returns:
         None
     """
+    adc_tpx = 0
+    adc_tpy = 0
+    
+    ## Loop I, TP-Y measures now
     tp_x.set_r0_low()
     tp_y.set_r1_high()
     sleep(0.001)
     debug('680 Low Impedance Test')
-    debug('Low-side {0}: {1} v'.format(tp_x.get_name(), tp_x.get_v()))
     debug('High-side {0}: {1} v'.format(tp_y.get_name(), tp_y.get_v()))
-    adc_tpx = 0
-    adc_tpy = 0
+
+    
+    for i in range(0, 10):
+        #adc_tpx += tp_x.get_v()
+        adc_tpy += tp_y.get_v()
+    
+    #adc_tpx = adc_tpx / 10
+    adc_tpy = adc_tpy / 10
+    
+    #debug('Average voltage tpx: {0} v'.format(adc_tpx))
+    debug('Average voltage tpy: {0} v'.format(adc_tpy))
+    
+    tp_y.set_r1_low()
+    ## Loop II, TP-X measures now
+    tp_x.set_r1_low()
+    tp_y.set_r0_high()
+    
+    debug('Low-side {0}: {1} v'.format(tp_x.get_name(), tp_x.get_v()))
     
     for i in range(0, 10):
         adc_tpx += tp_x.get_v()
-        adc_tpy += tp_y.get_v()
+        #adc_tpy += tp_y.get_v()
     
     adc_tpx = adc_tpx / 10
-    adc_tpy = adc_tpy / 10
-    # Sanity check:
-    # 1.95 / 0.075 * 40 - 40 = 1k
-    #adc_tpx = 0.075
-    #adc_tpy = 1.95
-    debug('Average voltage tpx: {0} v'.format(adc_tpx))
-    debug('Average voltage tpy: {0} v'.format(adc_tpy))
     
-    resistance = adc_tpy/adc_tpx * esp32_driving_pin_resistance - esp32_driving_pin_resistance
+    debug('Average voltage tpx: {0} v'.format(adc_tpx))
+    resistance = adc_tpy*(680+esp32_driving_pin_resistance)/adc_tpx - esp32_driving_pin_resistance
+    #resistance = adc_tpy/adc_tpx * esp32_driving_pin_resistance - esp32_driving_pin_resistance
     print(resistance)
+    
+    tp_y.set_r0_low()
+    sleep(111.001)
     
 def measure_resistance_470k(tp_x, tp_y):
     """
@@ -250,9 +267,9 @@ def measure_resistance_470k(tp_x, tp_y):
 def measure_resistance():
     global tp1, tp2, tp3
     measure_resistance_680(tp1, tp2)
-    measure_resistance_680(tp2, tp1)
-    measure_resistance_470k(tp1, tp2)
-    measure_resistance_470k(tp2, tp1)
+    #measure_resistance_680(tp2, tp1)
+    #measure_resistance_470k(tp1, tp2)
+    #measure_resistance_470k(tp2, tp1)
 
 def capacitor_discharge(tp_x, tp_y):
     # Safety pin check they are floating
@@ -317,7 +334,7 @@ def measure_phase():
         None
     """
     measure_resistance()
-    measure_capacitance()
+    #measure_capacitance()
 
 def main():
     """
@@ -329,8 +346,8 @@ def main():
     init_pins()
     debug("###################\n$ ## Init Pass: OK ##\n$ ###################\n$")
 
-    init_serial()
-    debug("\n$ ###########################\n$ ## Serial Comms Pass: OK ##\n$ ###########################\n$ ")
+    #init_serial()
+    #debug("\n$ ###########################\n$ ## Serial Comms Pass: OK ##\n$ ###########################\n$ ")
 
     if wifi_enabled:
         init_wifi()
@@ -341,6 +358,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
