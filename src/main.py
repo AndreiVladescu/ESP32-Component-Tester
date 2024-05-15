@@ -213,19 +213,16 @@ def measure_resistance_680(tp_x, tp_y):
     sleep(0.001)
     debug('680 Low Impedance Test')
     debug('High-side {0}: {1} v'.format(tp_y.get_name(), tp_y.get_v()))
-
     
     for i in range(0, 10):
-        #adc_tpx += tp_x.get_v()
         adc_tpy += tp_y.get_v()
     
-    #adc_tpx = adc_tpx / 10
     adc_tpy = adc_tpy / 10
     
-    #debug('Average voltage tpx: {0} v'.format(adc_tpx))
     debug('Average voltage tpy: {0} v'.format(adc_tpy))
     
     tp_y.set_r1_low()
+    
     ## Loop II, TP-X measures now
     tp_x.set_r1_low()
     tp_y.set_r0_high()
@@ -234,7 +231,6 @@ def measure_resistance_680(tp_x, tp_y):
     
     for i in range(0, 10):
         adc_tpx += tp_x.get_v()
-        #adc_tpy += tp_y.get_v()
     
     adc_tpx = adc_tpx / 10
     
@@ -244,7 +240,7 @@ def measure_resistance_680(tp_x, tp_y):
     print(resistance)
     
     tp_y.set_r0_low()
-    sleep(111.001)
+    #sleep(111.001)
     
 def measure_resistance_470k(tp_x, tp_y):
     """
