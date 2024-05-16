@@ -198,6 +198,7 @@ def measure_resistance_function(tp_x, tp_y, resistance):
 
      ## Loop I, TP-Y measures now
     tp_x.set_r0_low()
+    
     if resistance == 680:
         debug('680 Low Impedance Test')
         tp_y.set_r1_high()
@@ -205,11 +206,12 @@ def measure_resistance_function(tp_x, tp_y, resistance):
         debug('470k Low Impedance Test')
         tp_y.set_r2_high()
 
-    sleep(0.001)
+    sleep(0.005)
     debug('High-side {0}: {1} v'.format(tp_y.get_name(), tp_y.get_v()))
     
     for i in range(0, 10):
         adc_tpy += tp_y.get_v()
+        #sleep(0.005)
     
     adc_tpy = adc_tpy / 10
     
@@ -217,25 +219,37 @@ def measure_resistance_function(tp_x, tp_y, resistance):
     
     # Disarming the pins
     tp_y.set_pins_floating()
-    
+    tp_x.set_pins_floating()
     ## Loop II, TP-X measures now
-    tp_x.set_r1_low()
+    if resistance == 680:
+        debug('680 Low Impedance Test')
+        tp_x.set_r1_low()
+    else:
+        debug('470k High Impedance Test')
+        tp_x.set_r2_low()
+        
     tp_y.set_r0_high()
+    sleep(0.005)
     
     debug('Low-side {0}: {1} v'.format(tp_x.get_name(), tp_x.get_v()))
     
     for i in range(0, 10):
         adc_tpx += tp_x.get_v()
+        #sleep(0.005)
     
     adc_tpx = adc_tpx / 10
     
     debug('Average voltage tpx: {0} v'.format(adc_tpx))
-
-    print(adc_tpy*(resistance+pin_res)/adc_tpx - pin_res)
     
+    if resistance == 680:
+        print(adc_tpy*(resistance+pin_res)/adc_tpx - pin_res)
+    else:
+        print(adc_tpy * resistance / adc_tpx)
+
     # Disarming the pins
     tp_y.set_pins_floating()
-
+    tp_x.set_pins_floating()
+    
 def measure_resistance():
     global tp1, tp2, tp3
     measure_resistance_function(tp1, tp2, 680)
@@ -342,7 +356,8 @@ def main():
     measure_phase()
     
     debug("\n$ ##########################\n$ ## Measurement Pass: OK ##\n$ ##########################\n$ ")
-
+    
+    debug("\n$ #####################\n$ ## Loop Status: OK ##\n$ #####################\n$ ")
 if __name__ == "__main__":
     main()
 
