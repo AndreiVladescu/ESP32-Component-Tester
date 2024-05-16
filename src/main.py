@@ -8,6 +8,7 @@ import socket
 import select
 import ujson
 import uos
+import math
 import _thread
 import select
 import sys
@@ -243,14 +244,10 @@ def measure_resistance():
     measure_resistance_function(tp2, tp1, 470000)
 
 def capacitor_discharge(tp_x, tp_y):
-    # Safety pin check they are floating
-    tp_x.set_r0_floating()
-    tp_y.set_r0_floating()
-    tp_x.set_r1_floating()
-    tp_y.set_r1_floating()
-    tp_x.set_r2_floating()
-    tp_y.set_r2_floating()
-
+    # Safety check
+    tp_x.set_pins_floating()
+    tp_y.set_pins_floating()
+    
     # Testing if the would-be capacitor has any charge left
     cap_voltage_x = tp_x.get_v()
     cap_voltage_y = tp_y.get_v()
@@ -259,37 +256,63 @@ def capacitor_discharge(tp_x, tp_y):
 
     if cap_voltage_x > cap_threshold_voltage or cap_voltage_y > cap_threshold_voltage:
         debug('Capacitor has big charge. Discharge it with a screwdriver')
-        return
+        return -2
 
     debug('Capacitor has a small charge. Short the pins')
     # Pin shorting through the 680 Ohm resistor
     tp_x.set_r0_low()
     tp_y.set_r1_low()
-    sleep(0.05)
+    max_count_discharge = 10
+    index = 0
+    while tp_x.get_v() > 0.1 or tp_y.get_v() > 0.1:
+        sleep(0.05)
+        index+=1
+        if index > max_count_discharge:
+            debug('Discharge failed. Exiting...')
+            return -1
 
-def measure_capacitance_test(tp_x, tp_y):
-    capacitor_discharge(tp_x, tp_y)
-    
-    # Charge the pins for some time
+    return 0
+
+def capacitor_charge(tp_x, tp_y):
+    pulse_time_ms = 10
+    pulse_count = 0
+    pulse_timeout = 256
+    capacitor_minimum_threshold = 63.2 * 3.3 
+    # Charge the pins
     tp_x.set_r0_low()
     tp_y.set_r1_high()
-    sleep(0.01)  # Adjust the charging time as needed
-    
-    # Measure the voltage after charging
-    voltage_x = tp_x.get_v()
-    voltage_y = tp_y.get_v()
-    
-    # Check if the voltage has changed significantly
-    voltage_threshold = 0.1  # Adjust the threshold as needed
-    if abs(voltage_x - voltage_y) > voltage_threshold:
-        debug('Capacitor detected!')
+
+    while pulse_count < pulse_timeout:
+        sleep(pulse_time_ms/1000)
+        pulse_count += 1
+        if tp_x.get_v() > capacitor_minimum_threshold or tp_y.get_v() > capacitor_minimum_threshold:
+            return pulse_count
         
-        # Calculate the capacitance using the voltage and charging time
-        capacitance = 0 # ?????
-        
-        debug('Capacitance: {0} F'.format(capacitance))
-    else:
-        debug('No capacitor detected.')
+    debug('Capacitor charge failed. Exiting...')
+
+    return -1
+
+def measure_capacitance_test(tp_x, tp_y):
+
+    # Discharge the capacitor
+    rc = capacitor_discharge(tp_x, tp_y)
+    
+    if rc == -1:
+        # treat capacitor big charge
+        return
+    elif rc == -2:
+        # treat capacitor discharge fail
+        return
+    
+    # Charge the pins
+    rc = capacitor_charge(tp_x, tp_y)
+    if rc == -1:
+        # treat capacitor charge fail
+        return
+    
+    capacitance = rc / (68 * math.log(2)) # capacitance in uF
+
+    debug('Capacitance: {0} F'.format(capacitance))
 
 def measure_capacitance():
     global tp1, tp2, tp3
@@ -297,14 +320,8 @@ def measure_capacitance():
     measure_capacitance_test(tp2, tp1)
 
 def measure_phase():
-    """
-    Measures the resistance.
-
-    Returns:
-        None
-    """
     measure_resistance()
-    #measure_capacitance()
+    measure_capacitance()
 
 def main():
     """

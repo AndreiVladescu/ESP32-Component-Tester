@@ -12,11 +12,15 @@ debug_check = True
 pin_res = 40
 wifi_enabled = True
 
+debug_trace_index = 0
+
 ## Aux functions
 def debug(message):
     if debug_check:
-        print('$ ' + message)
-        
+        print('$ ' + debug_trace_index + ": " + message)
+        debug_trace_index += 1
+
+## Classes
 class TestPoint:
     def __init__(self, adc_pin, r0_pin, r1_pin, r2_pin, name):
         """
