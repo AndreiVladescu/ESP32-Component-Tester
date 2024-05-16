@@ -179,7 +179,6 @@ def init_serial():
     _thread.start_new_thread(rx_serial_thread, ())
     _thread.start_new_thread(tx_serial_thread, ())
 
-
 def init_pins():
     """
     Initializes the test points (tp1, tp2, tp3) with their respective ADC channels and pin configurations.
@@ -192,26 +191,20 @@ def init_pins():
     # Test point 3/C
     tp3 = TestPoint(adc_tp3, tp3_pins[0], tp3_pins[1], tp3_pins[2], 'TP3')
 
-
-def measure_resistance_680(tp_x, tp_y):
-    """
-    Measures the resistance using the 680 Ohm test configuration.
-
-    Args:
-        tp_x (TestPoint): The test point connected to the low side of the resistor.
-        tp_y (TestPoint): The test point connected to the high side of the resistor.
-
-    Returns:
-        None
-    """
+def measure_resistance_function(tp_x, tp_y, resistance):
     adc_tpx = 0
     adc_tpy = 0
-    
-    ## Loop I, TP-Y measures now
+
+     ## Loop I, TP-Y measures now
     tp_x.set_r0_low()
-    tp_y.set_r1_high()
+    if resistance == 680:
+        debug('680 Low Impedance Test')
+        tp_y.set_r1_high()
+    else:
+        debug('470k Low Impedance Test')
+        tp_y.set_r2_high()
+
     sleep(0.001)
-    debug('680 Low Impedance Test')
     debug('High-side {0}: {1} v'.format(tp_y.get_name(), tp_y.get_v()))
     
     for i in range(0, 10):
@@ -221,7 +214,8 @@ def measure_resistance_680(tp_x, tp_y):
     
     debug('Average voltage tpy: {0} v'.format(adc_tpy))
     
-    tp_y.set_r1_low()
+    # Disarming the pins
+    tp_y.set_pins_floating()
     
     ## Loop II, TP-X measures now
     tp_x.set_r1_low()
@@ -235,37 +229,18 @@ def measure_resistance_680(tp_x, tp_y):
     adc_tpx = adc_tpx / 10
     
     debug('Average voltage tpx: {0} v'.format(adc_tpx))
-    resistance = adc_tpy*(680+esp32_driving_pin_resistance)/adc_tpx - esp32_driving_pin_resistance
-    #resistance = adc_tpy/adc_tpx * esp32_driving_pin_resistance - esp32_driving_pin_resistance
-    print(resistance)
-    
-    tp_y.set_r0_low()
-    #sleep(111.001)
-    
-def measure_resistance_470k(tp_x, tp_y):
-    """
-    Measures the resistance using the 470k Ohm test configuration.
 
-    Args:
-        tp_x (TestPoint): The test point connected to the low side of the resistor.
-        tp_y (TestPoint): The test point connected to the high side of the resistor.
-
-    Returns:
-        None
-    """
-    tp_x.set_r0_low()
-    tp_y.set_r2_high()
-    sleep(0.001)
-    debug('470k High Impedance Test')
-    debug('Low-side {0}: {1}'.format(tp_x.get_name(), tp_x.get_v()))
-    debug('High-side {0}: {1}'.format(tp_y.get_name(), tp_y.get_v()))
+    print(adc_tpy*(resistance+pin_res)/adc_tpx - pin_res)
+    
+    # Disarming the pins
+    tp_y.set_pins_floating()
 
 def measure_resistance():
     global tp1, tp2, tp3
-    measure_resistance_680(tp1, tp2)
-    #measure_resistance_680(tp2, tp1)
-    #measure_resistance_470k(tp1, tp2)
-    #measure_resistance_470k(tp2, tp1)
+    measure_resistance_function(tp1, tp2, 680)
+    measure_resistance_function(tp2, tp1, 680)
+    measure_resistance_function(tp1, tp2, 470000)
+    measure_resistance_function(tp2, tp1, 470000)
 
 def capacitor_discharge(tp_x, tp_y):
     # Safety pin check they are floating
@@ -315,7 +290,6 @@ def measure_capacitance_test(tp_x, tp_y):
         debug('Capacitance: {0} F'.format(capacitance))
     else:
         debug('No capacitor detected.')
-
 
 def measure_capacitance():
     global tp1, tp2, tp3

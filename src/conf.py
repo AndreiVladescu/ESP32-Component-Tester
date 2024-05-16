@@ -9,7 +9,7 @@ tp3_pins = [12, 13, 15]
 
 ## Variable definitions
 debug_check = True
-esp32_driving_pin_resistance = 40
+pin_res = 40
 wifi_enabled = True
 
 ## Aux functions
@@ -114,3 +114,8 @@ class TestPoint:
     def set_r2_floating(self):
         self.r2_status = 0
         self.r2 = Pin(self.r2_pin, Pin.IN)
+
+    def set_pins_floating(self):
+        self.set_r0_floating()
+        self.set_r1_floating()
+        self.set_r2_floating()
