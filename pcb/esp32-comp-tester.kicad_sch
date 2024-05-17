@@ -3014,7 +3014,7 @@
     (property "Reference" "TP14" (at 172.72 75.565 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "TP_3.3V" (at 163.195 75.565 90)
+    (property "Value" "GPIO_4" (at 163.195 75.565 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "TestPoint:TestPoint_Pad_D2.0mm" (at 158.115 81.28 0)
