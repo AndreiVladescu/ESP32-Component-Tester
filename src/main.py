@@ -18,6 +18,8 @@ rx_ch.register(sys.stdin) # register the stdin file descriptor
 
 tp1, tp2, tp3 = None, None, None
 
+measured_resistance = 0
+
 def save_wifi_credentials(ssid, password):
     """
     Save the provided Wi-Fi credentials to a JSON file.
@@ -241,22 +243,46 @@ def measure_resistance_function(tp_x, tp_y, resistance):
     
     debug('Average voltage tpx: {0} v'.format(adc_tpx))
     
+    temp_resistance = 0
+    
     if resistance == 680:
-        print(adc_tpy*(resistance+pin_res)/adc_tpx - pin_res)
+        temp_resistance = adc_tpy*(resistance+pin_res)/adc_tpx - pin_res
     else:
-        print(adc_tpy * resistance / adc_tpx)
-
+        temp_resistance = adc_tpy * resistance / adc_tpx
+        
+    
     # Disarming the pins
     tp_y.set_pins_floating()
     tp_x.set_pins_floating()
     
+    return temp_resistance
+
 def measure_resistance():
     global tp1, tp2, tp3
-    measure_resistance_function(tp1, tp2, 680)
-    measure_resistance_function(tp2, tp1, 680)
-    measure_resistance_function(tp1, tp2, 470000)
-    measure_resistance_function(tp2, tp1, 470000)
-
+    global measured_resistance
+    
+    temp_resistance1 = measure_resistance_function(tp1, tp2, 680)
+    #print(temp_resistance1)
+    
+    temp_resistance2 = measure_resistance_function(tp2, tp1, 680)
+    #print(temp_resistance2)
+    
+    temp_resistance3 = measure_resistance_function(tp1, tp2, 470000)
+    #print(temp_resistance3)
+    
+    temp_resistance4 = measure_resistance_function(tp2, tp1, 470000)
+    #print(temp_resistance4)
+    
+    avg_resistance1 = (temp_resistance1 + temp_resistance2) / 2
+    avg_resistance2 = (temp_resistance3 + temp_resistance4) / 2
+    
+    if avg_resistance1 < 10000:
+        measured_resistance = avg_resistance1
+        print(avg_resistance1)
+    else:
+        measured_resistance = avg_resistance2
+        print(avg_resistance2)
+    
 def capacitor_discharge(tp_x, tp_y):
     # Safety check
     tp_x.set_pins_floating()
@@ -338,21 +364,15 @@ def measure_phase():
     measure_capacitance()
 
 def main():
-    """
-    The main function of the program.
-
-    Returns:
-        None
-    """
     init_pins()
     debug("###################\n$ ## Init Pass: OK ##\n$ ###################\n$")
-
+    
     #init_serial()
     #debug("\n$ ###########################\n$ ## Serial Comms Pass: OK ##\n$ ###########################\n$ ")
-
+    
     if wifi_enabled:
         init_wifi()
-        
+    
     measure_phase()
     
     debug("\n$ ##########################\n$ ## Measurement Pass: OK ##\n$ ##########################\n$ ")
