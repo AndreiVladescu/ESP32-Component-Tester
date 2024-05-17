@@ -16,8 +16,9 @@ debug_trace_index = 0
 
 ## Aux functions
 def debug(message):
+    global debug_trace_index
     if debug_check:
-        print('$ ' + debug_trace_index + ": " + message)
+        print('$ ' + str(debug_trace_index) + ": " + message)
         debug_trace_index += 1
 
 ## Classes
@@ -106,14 +107,14 @@ class TestPoint:
         self.r2.on()
         self.r2_status = 1
         self.set_r1_floating()
-        self.set_r2_floating()
+        self.set_r0_floating()
 
     def set_r2_low(self):
         self.r2 = Pin(self.r2_pin, Pin.OUT)
         self.r2.off()
         self.r2_status = -1
         self.set_r1_floating()
-        self.set_r2_floating()
+        self.set_r0_floating()
 
     def set_r2_floating(self):
         self.r2_status = 0
