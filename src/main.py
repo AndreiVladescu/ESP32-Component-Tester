@@ -1,7 +1,7 @@
 from conf import *
 
-from machine import Pin, ADC
-from time import sleep
+from machine import Pin, ADC, Timer
+from time import sleep, sleep_us, sleep_ms, ticks_ms, ticks_diff
 import _thread
 import network
 import socket
@@ -286,51 +286,75 @@ def measure_resistance():
     
 def capacitor_discharge(tp_x, tp_y):
     # Safety check
-    tp_x.set_pins_floating()
-    tp_y.set_pins_floating()
+    tp_x.set_r0_low()
+    tp_y.set_r1_low()
     
     # Testing if the would-be capacitor has any charge left
     cap_voltage_x = tp_x.get_v()
     cap_voltage_y = tp_y.get_v()
-    
-    cap_threshold_voltage = 1.3
 
+    cap_threshold_voltage = 3.2
     if cap_voltage_x > cap_threshold_voltage or cap_voltage_y > cap_threshold_voltage:
         debug('Capacitor has big charge. Discharge it with a screwdriver')
         return -2
 
-    debug('Capacitor has a small charge. Short the pins')
+    # debug('Capacitor has a small charge. Short the pins')
     # Pin shorting through the 680 Ohm resistor
-    tp_x.set_r0_low()
-    tp_y.set_r1_low()
-    max_count_discharge = 10
-    index = 0
-    while tp_x.get_v() > 0.1 or tp_y.get_v() > 0.1:
-        sleep(0.05)
-        index+=1
-        if index > max_count_discharge:
+    
+    max_count_discharge = 64
+    discharge_index = 0
+
+    while tp_x.get_v() > 0.16 or tp_y.get_v() > 0.16:
+        sleep(0.2)
+        
+        debug('Discharging status: TP X: {0}, TP Y: {1}'.format(tp_x.get_v(), tp_y.get_v()))
+        discharge_index+=1
+        
+        if discharge_index > max_count_discharge:
             debug('Discharge failed. Exiting...')
             return -1
 
     return 0
 
 def capacitor_charge(tp_x, tp_y):
-    pulse_time_ms = 10
+    pulse_time_ms = 1
     pulse_count = 0
-    pulse_timeout = 256
-    capacitor_minimum_threshold = 63.2 * 3.3 
+    pulse_timeout = 4096
+    capacitor_target_voltage = 2.0856 #0.86 * 3.3 #2.0856 # 0.632 * 3.3 
     # Charge the pins
+    
+    start = ticks_ms() # get millisecond counter
+    
     tp_x.set_r0_low()
     tp_y.set_r1_high()
-
+    
+    # Capacitor missing
+    if tp_y.get_v() > capacitor_target_voltage:
+        tp_x.set_pins_floating()
+        tp_y.set_pins_floating()
+        debug('No capacitor detected')
+        return -2
+    
     while pulse_count < pulse_timeout:
-        sleep(pulse_time_ms/1000)
+        
+        #sleep_ms(pulse_time_ms)
+        #print(tp_x.get_v(), tp_y.get_v())
+
         pulse_count += 1
-        if tp_x.get_v() > capacitor_minimum_threshold or tp_y.get_v() > capacitor_minimum_threshold:
-            return pulse_count
+        
+        debug('Charging status: TP X: {0}, TP Y: {1}'.format(tp_x.get_v(), tp_y.get_v()))
+        
+        if tp_y.get_v() > capacitor_target_voltage:
+            tp_x.set_pins_floating()
+            tp_y.set_pins_floating()
+            delta = ticks_diff(ticks_ms(), start)
+            return delta
         
     debug('Capacitor charge failed. Exiting...')
-
+    
+    tp_x.set_pins_floating()
+    tp_y.set_pins_floating()
+    
     return -1
 
 def measure_capacitance_test(tp_x, tp_y):
@@ -345,20 +369,23 @@ def measure_capacitance_test(tp_x, tp_y):
         # treat capacitor discharge fail
         return
     
-    # Charge the pins
+    # Charge the capacitor
     rc = capacitor_charge(tp_x, tp_y)
     if rc == -1:
         # treat capacitor charge fail
         return
+    elif rc == -2:
+        # treat capacitor not detected
+        return
     
-    capacitance = rc / (68 * math.log(2)) # capacitance in uF
-
-    debug('Capacitance: {0} F'.format(capacitance))
+    capacitance = rc / 680 * 1000 # capacitance in uF
+    
+    debug('Capacitance: {0} uF'.format(capacitance))
 
 def measure_capacitance():
     global tp1, tp2, tp3
     measure_capacitance_test(tp1, tp2)
-    measure_capacitance_test(tp2, tp1)
+    #measure_capacitance_test(tp2, tp1)
 
 def test_diode(tp_x, tp_y):
     diode_detected = False
@@ -433,9 +460,11 @@ def measure_semiconductors():
         debug('Diode not detected at {0} and {1}'.format(flow_direction[1], flow_direction[0]))
     '''
 def measure_phase():
-    measure_semiconductors()
+    
+    measure_capacitance()
+    #measure_semiconductors()
     #measure_resistance()
-    #measure_capacitance()
+    
     
 def main():
     global wifi_enabled
