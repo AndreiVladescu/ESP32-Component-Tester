@@ -70,7 +70,7 @@ def connect_wifi(ssid, password):
         return False
 
     wlan = network.WLAN(network.STA_IF)
-    wlan.config(dhcp_hostname = "component-tester")
+    #wlan.config(dhcp_hostname = "component-tester")
     wlan.active(True)
 
     if not wlan.isconnected():
@@ -78,8 +78,8 @@ def connect_wifi(ssid, password):
         wlan.connect(ssid, password)
         attempts = 0
         while not wlan.isconnected():
-            if attempts > 3:
-                debug('Failed to connect after 3 attempts. Exiting...')
+            if attempts > 10:
+                debug('Failed to connect after 10 attempts. Exiting...')
                 return False
             sleep(1)
             attempts += 1
@@ -97,6 +97,7 @@ def handle_request(conn):
     Returns:
         None
     """
+    global measured_resistance
     template_content  = ""
     
     with open('template.html', 'r') as file:
@@ -106,6 +107,7 @@ def handle_request(conn):
         'tp1_v': str(tp1.get_v()) + " " + tp1.get_status(),
         'tp2_v': str(tp2.get_v()) + " " + tp2.get_status(),
         'tp3_v': str(tp3.get_v()) + " " + tp3.get_status(),
+        'measured_resistance': str(measured_resistance),
     }
     
     rendered_content = template_content.format(**dynamic_data)
@@ -124,8 +126,7 @@ def init_wifi():
     """
     saved_ssid, saved_password = read_wifi_credentials()
     if saved_ssid and saved_password:
-        debug("Found saved WiFi AP: {0} with password {1}", saved_ssid, saved_password)
-
+        debug("Found saved WiFi AP: {0} with password {1}".format(saved_ssid, saved_password))
         wifi_connected = connect_wifi(saved_ssid, saved_password)
         if wifi_connected:
             _thread.start_new_thread(start_server, ())
@@ -359,19 +360,94 @@ def measure_capacitance():
     measure_capacitance_test(tp1, tp2)
     measure_capacitance_test(tp2, tp1)
 
+def test_diode(tp_x, tp_y):
+    diode_detected = False
+    forward_voltage = -1
+    flow_direction = (tp_x.get_name(), tp_y.get_name())
+    
+    tp_x.set_pins_floating()
+    tp_y.set_pins_floating()
+    
+    # Testing which is cathode and anode part 1
+    tp_x.set_r1_low()
+    tp_y.set_r0_high()
+    
+    y_x_current_flow = False
+    y_x_forward_voltage = 0
+    
+    if tp_x.get_v() > 0.15:
+        y_x_current_flow = True
+        y_x_forward_voltage = tp_y.get_v() - tp_x.get_v() #3.3 or tp_y.get_v for accuracy
+        flow_direction = (tp_y.get_name(), tp_x.get_name()) # current flows from y to x
+    
+    # Testing which is cathode and anode part 1
+    tp_y.set_r0_floating()
+    tp_y.set_r1_low()
+    tp_x.set_r0_high()
+    
+    x_y_current_flow = False
+    x_y_forward_voltage = 0
+    
+    if tp_y.get_v() > 0.15:
+        x_y_current_flow = True
+        x_y_forward_voltage = tp_x.get_v() - tp_y.get_v() #3.3 or tp_x.get_v for accuracy
+        flow_direction = (tp_x.get_name(), tp_y.get_name()) # current flows from x to y
+         
+    diode_detected = x_y_current_flow != y_x_current_flow
+    
+    if diode_detected:
+        forward_voltage = max(x_y_forward_voltage, y_x_forward_voltage)
+    
+    tp_x.set_pins_floating()
+    tp_y.set_pins_floating()
+    
+    return diode_detected, forward_voltage, flow_direction
+    
+def measure_semiconductors():
+    global tp1, tp2, tp3
+    
+    diode_detected = False
+    forward_voltage = -1
+    flow_direction = ('none', 'none')
+    
+    diode_detected, forward_voltage, flow_direction = test_diode(tp1, tp2)
+    
+    if diode_detected:
+        debug('Diode detected with Vf: {0}, cathode at {1} and anode at {2}'.format(forward_voltage, flow_direction[1], flow_direction[0]))
+    else:
+        debug('Diode not detected between {0} and {1}'.format(flow_direction[1], flow_direction[0]))
+    
+    '''
+    diode_detected, forward_voltage, flow_direction = test_diode(tp1, tp3)
+    
+    if diode_detected:
+        debug('Diode detected with Vf: {0}, cathode at {1} and anode at {2}'.format(forward_voltage, flow_direction[1], flow_direction[0]))
+    else:
+        debug('Diode not detected at {0} and {1}'.format(flow_direction[1], flow_direction[0]))
+        
+    diode_detected, forward_voltage, flow_direction = test_diode(tp2, tp3)
+        
+    if diode_detected:
+        debug('Diode detected with Vf: {0}, cathode at {1} and anode at {2}'.format(forward_voltage, flow_direction[1], flow_direction[0]))
+    else:
+        debug('Diode not detected at {0} and {1}'.format(flow_direction[1], flow_direction[0]))
+    '''
 def measure_phase():
-    measure_resistance()
-    measure_capacitance()
-
+    measure_semiconductors()
+    #measure_resistance()
+    #measure_capacitance()
+    
 def main():
+    global wifi_enabled
+    
     init_pins()
     debug("###################\n$ ## Init Pass: OK ##\n$ ###################\n$")
     
     #init_serial()
     #debug("\n$ ###########################\n$ ## Serial Comms Pass: OK ##\n$ ###########################\n$ ")
     
-    if wifi_enabled:
-        init_wifi()
+    #if wifi_enabled:
+    #    init_wifi()
     
     measure_phase()
     

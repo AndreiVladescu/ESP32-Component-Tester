@@ -9,8 +9,9 @@ tp3_pins = [12, 13, 15]
 
 ## Variable definitions
 debug_check = True
-pin_res = 40
 wifi_enabled = True
+
+pin_res = 40
 
 debug_trace_index = 0
 
