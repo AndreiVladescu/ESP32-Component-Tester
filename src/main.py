@@ -335,16 +335,27 @@ def capacitor_charge(tp_x, tp_y):
         debug('No capacitor detected')
         return -2
     
+    diode_double_check = False
+    
     while pulse_count < pulse_timeout:
         
         #sleep_ms(pulse_time_ms)
         #print(tp_x.get_v(), tp_y.get_v())
-
+        tp_y_v = tp_y.get_v()
         pulse_count += 1
         
         debug('Charging status: TP X: {0}, TP Y: {1}'.format(tp_x.get_v(), tp_y.get_v()))
         
-        if tp_y.get_v() > capacitor_target_voltage:
+        if pulse_count >= 16 and tp_y_v == 1.91:
+            if not diode_double_check:
+                diode_double_check = True
+            else:
+                tp_x.set_pins_floating()
+                tp_y.set_pins_floating()
+                delta = ticks_diff(ticks_ms(), start)
+                return delta
+        
+        if tp_y_v > capacitor_target_voltage:
             tp_x.set_pins_floating()
             tp_y.set_pins_floating()
             delta = ticks_diff(ticks_ms(), start)
@@ -385,7 +396,7 @@ def measure_capacitance_test(tp_x, tp_y):
 def measure_capacitance():
     global tp1, tp2, tp3
     measure_capacitance_test(tp1, tp2)
-    #measure_capacitance_test(tp2, tp1)
+    measure_capacitance_test(tp2, tp1)
 
 def test_diode(tp_x, tp_y):
     diode_detected = False
@@ -462,7 +473,7 @@ def measure_semiconductors():
 def measure_phase():
     
     measure_capacitance()
-    #measure_semiconductors()
+    measure_semiconductors()
     #measure_resistance()
     
     
