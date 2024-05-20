@@ -5,44 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ESP32 Component Tester</title>
     <style>
-    body {{
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f0f0f0;
-    }}
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
 
-    .container {{
-        width: 80%;
-        margin: 20px auto;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }}
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-    h1 {{
-        color: #333;
-        text-align: center;
-    }}
+        h1 {
+            color: #333;
+            text-align: center;
+        }
 
-    p {{
-        color: #666;
-        font-size: 16px;
-        line-height: 1.6;
-        margin-bottom: 10px;
-    }}
-</style>
+        p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
 
+        .component-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .component-info img {
+            width: 200px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .test-points {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .test-point {
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .characteristics {
+            margin-bottom: 20px;
+        }
+
+        .characteristics h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .characteristics p {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>ESP32 Component Tester</h1>
-        <p>Volts at TP1: {tp1_v}</p>
-        <p>Volts at TP2: {tp2_v}</p>
-        <p>Volts at TP3: {tp3_v}</p>
-        <br>
-        <p> Resistance: {measured_resistance}</p>
+
+        <div class="component-info">
+            <img src="{component_image_url}" alt="Detected Component">
+            <p>Detected Component: {component_name}</p>
+        </div>
+
+        <div class="test-points">
+            <div class="test-point">
+                <p>Test Point A</p>
+                <p>Voltage: {tp1_v} V</p>
+            </div>
+            <div class="test-point">
+                <p>Test Point B</p>
+                <p>Voltage: {tp2_v} V</p>
+            </div>
+            <div class="test-point">
+                <p>Test Point C</p>
+                <p>Voltage: {tp3_v} V</p>
+            </div>
+        </div>
+
+        <div class="characteristics">
+            <h2>Component Characteristics</h2>
+            <p>Resistance: {measured_resistance} Ω</p>
+            <p>Capacitance: {measured_capacitance} F</p>
+            <p>Inductance: {measured_inductance} H</p>
+        </div>
     </div>
 </body>
 </html>
