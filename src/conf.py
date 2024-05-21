@@ -15,6 +15,75 @@ pin_res = 40
 
 debug_trace_index = 0
 
+css_style = """
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .component-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .component-info img {
+            width: 200px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .test-points {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .test-point {
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .characteristics {
+            margin-bottom: 20px;
+        }
+
+        .characteristics h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .characteristics p {
+            text-align: center;
+        }
+    </style>
+"""
 ## Aux functions
 def debug(message):
     global debug_trace_index
@@ -125,3 +194,20 @@ class TestPoint:
         self.set_r0_floating()
         self.set_r1_floating()
         self.set_r2_floating()
+
+# Class to handle the detected components
+class Component:
+    def __init__(self, name, image, data):
+        self.name = name
+        self.image = image
+        self.data = data
+    
+    def get_name(self):
+        return self.name
+    
+    def get_image(self):
+        return self.image
+    
+    def get_data(self):
+        return self.data
+    

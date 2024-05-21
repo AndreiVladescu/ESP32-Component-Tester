@@ -20,6 +20,12 @@ tp1, tp2, tp3 = None, None, None
 
 measured_resistance = 0
 
+resistor_component = Component('Resistor', '<img loading="eager" width="128" height="128" src="https://symbols-electrical.getvecta.com/stencil_229/84_resistor.1469eb6bed.svg" alt="Resistor" title="Resistor" style="transform: rotate(90deg);">', 'Resistance: {resistance} Ω')
+diode_component = Component('Diode', 'diode.jpg', 'Forward voltage: {forward_voltage} V<br> Flow direction: {flow_direction[0]} -> {flow_direction[1]}')
+capacitor_component = Component('Capacitor', 'capacitor.jpg', 'Capacitance: {capacitance} F')
+
+detected_component = 0
+
 def save_wifi_credentials(ssid, password):
     """
     Save the provided Wi-Fi credentials to a JSON file.
@@ -83,8 +89,8 @@ def connect_wifi(ssid, password):
                 return False
             sleep(1)
             attempts += 1
-    debug('Connected to WiFi:' + ssid)
-    debug('IP address:' + wlan.ifconfig()[0])
+    debug('Connected to WiFi: ' + ssid)
+    debug('IP address: ' + wlan.ifconfig()[0])
     return True
     
 def handle_request(conn):
@@ -97,20 +103,50 @@ def handle_request(conn):
     Returns:
         None
     """
+    global resistor_component, diode_component, capacitor_component
+    global detected_component
     global measured_resistance
     template_content  = ""
     
     with open('template.html', 'r') as file:
         template_content = file.read()
-        
+    
+    component_name = ''
+    component_image_url = ''
+    component_characteristics = ''
+
+    if detected_component == 1:
+        component_name = resistor_component.get_name()
+        component_image_url = resistor_component.get_image()
+        component_characteristics = resistor_component.get_data()
+        component_characteristics = component_characteristics.replace('{resistance}', str(measured_resistance))
+    elif detected_component == 2:
+        component_name = capacitor_component.get_name()
+        component_image_url = capacitor_component.get_image()
+        component_characteristics = capacitor_component.get_data()
+    elif detected_component == 3:    
+        component_name = diode_component.get_name()
+        component_image_url = diode_component.get_image()
+        component_characteristics = diode_component.get_data()
+
     dynamic_data = {
-        'tp1_v': str(tp1.get_v()) + " " + tp1.get_status(),
-        'tp2_v': str(tp2.get_v()) + " " + tp2.get_status(),
-        'tp3_v': str(tp3.get_v()) + " " + tp3.get_status(),
-        'measured_resistance': str(measured_resistance),
+        'tp1': str(tp1.get_v()),
+        'tp2': str(tp2.get_v()),
+        'tp3': str(tp3.get_v()),
+        'component_name': component_name,
+        'component_image_url': component_image_url,
+        'component_characteristics': component_characteristics,
+        'css_style': css_style,
     }
     
     rendered_content = template_content.format(**dynamic_data)
+
+
+    
+    '''     <p>Resistance: {measured_resistance} Ω</p>
+            <p>Capacitance: {measured_capacitance} F</p>
+            <p>Inductance: {measured_inductance} H</p>'''
+    
     
     response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n" + rendered_content
     
@@ -141,6 +177,7 @@ def start_server():
         None
     """
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # Create a TCP/IP socket
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) # Set the socket option to reuse the address
     s.bind(('0.0.0.0', 80))  # Bind the socket to address and port
     s.listen(5)  # Listen for incoming connections
 
@@ -259,6 +296,7 @@ def measure_resistance_function(tp_x, tp_y, resistance):
     return temp_resistance
 
 def measure_resistance():
+    global detected_component
     global tp1, tp2, tp3
     global measured_resistance
     
@@ -284,6 +322,8 @@ def measure_resistance():
         measured_resistance = avg_resistance2
         print(avg_resistance2)
     
+    detected_component += 1
+
 def capacitor_discharge(tp_x, tp_y):
     # Safety check
     tp_x.set_r0_low()
@@ -346,7 +386,7 @@ def capacitor_charge(tp_x, tp_y):
         
         debug('Charging status: TP X: {0}, TP Y: {1}'.format(tp_x.get_v(), tp_y.get_v()))
         
-        if pulse_count >= 16 and tp_y_v == 1.91:
+        if pulse_count >= 16 and (tp_y_v >= 1.9 and tp_y_v <= 1.92):
             if not diode_double_check:
                 diode_double_check = True
             else:
@@ -474,7 +514,7 @@ def measure_phase():
     
     measure_capacitance()
     measure_semiconductors()
-    #measure_resistance()
+    measure_resistance()
     
     
 def main():
@@ -486,8 +526,8 @@ def main():
     #init_serial()
     #debug("\n$ ###########################\n$ ## Serial Comms Pass: OK ##\n$ ###########################\n$ ")
     
-    #if wifi_enabled:
-    #    init_wifi()
+    if wifi_enabled:
+        init_wifi()
     
     measure_phase()
     
