@@ -211,3 +211,42 @@ class Component:
     def get_data(self):
         return self.data
     
+class Resistor(Component):
+    def __init__(self, resistance = 0):
+        
+        self.resistance = resistance
+        name = 'Resistor'
+        image = '<img loading="eager" width="128" height="128" src="https://symbols-electrical.getvecta.com/stencil_229/84_resistor.1469eb6bed.svg" alt="Resistor" title="Resistor" style="transform: rotate(90deg);">'
+        data = 'Resistance: {resistance} Ω'
+        data = data.replace('{resistance}', str(resistance))
+        super().__init__(name, image, data)
+
+    def get_resistance(self):
+        return self.resistance
+    
+class Capacitor(Component):
+    def __init__(self, capacitance = 0):
+        
+        self.capacitance = capacitance
+        name = 'Capacitor'
+        image = '<img loading="eager" width="128" height="128" src="https://symbols-electrical.getvecta.com/stencil_229/82_capacitor.4925a40124.svg" alt="Capacitor" title="Capacitor" style="transform: rotate(90deg);">'
+        data = 'Capacitance: {capacitance} uF'
+        data = data.replace('{capacitance}', str(capacitance))
+        super().__init__(name, image, data)
+
+    def get_capacitance(self):
+        return self.capacitance
+    
+class Diode(Component):
+    def __init__(self, forward_voltage = 0, flow_direction = [0, 0]):
+        self.forward_voltage = forward_voltage
+        name = 'Diode'
+        image = '<img loading="eager" width="128" height="128" src="https://symbols-electrical.getvecta.com/stencil_229/89_diode.9094b2b79b.svg" alt="Diode" title="Diode" style="transform: rotate(90deg);">'
+        data = 'Forward voltage: {forward_voltage} V<br> Flow direction: {flow_direction[0]} -> {flow_direction[1]}'
+        data = data.replace('{forward_voltage}', str(forward_voltage))
+        data = data.replace('{flow_direction[0]}', str(flow_direction[0]))
+        data = data.replace('{flow_direction[1]}', str(flow_direction[1]))
+        super().__init__(name, image, data)
+
+    def get_forward_voltage(self):
+        return self.forward_voltage

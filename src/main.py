@@ -18,11 +18,9 @@ rx_ch.register(sys.stdin) # register the stdin file descriptor
 
 tp1, tp2, tp3 = None, None, None
 
-measured_resistance = 0
-
-resistor_component = Component('Resistor', '<img loading="eager" width="128" height="128" src="https://symbols-electrical.getvecta.com/stencil_229/84_resistor.1469eb6bed.svg" alt="Resistor" title="Resistor" style="transform: rotate(90deg);">', 'Resistance: {resistance} Ω')
-diode_component = Component('Diode', 'diode.jpg', 'Forward voltage: {forward_voltage} V<br> Flow direction: {flow_direction[0]} -> {flow_direction[1]}')
-capacitor_component = Component('Capacitor', 'capacitor.jpg', 'Capacitance: {capacitance} F')
+resistor_component = Resistor(0)
+diode_component = Diode(0, [0, 0])
+capacitor_component = Capacitor(0)
 
 detected_component = 0
 
@@ -105,7 +103,6 @@ def handle_request(conn):
     """
     global resistor_component, diode_component, capacitor_component
     global detected_component
-    global measured_resistance
     template_content  = ""
     
     with open('template.html', 'r') as file:
@@ -115,20 +112,22 @@ def handle_request(conn):
     component_image_url = ''
     component_characteristics = ''
 
-    if detected_component == 1:
-        component_name = resistor_component.get_name()
-        component_image_url = resistor_component.get_image()
-        component_characteristics = resistor_component.get_data()
-        component_characteristics = component_characteristics.replace('{resistance}', str(measured_resistance))
-    elif detected_component == 2:
-        component_name = capacitor_component.get_name()
-        component_image_url = capacitor_component.get_image()
-        component_characteristics = capacitor_component.get_data()
-    elif detected_component == 3:    
+    if detected_component & 3:    
         component_name = diode_component.get_name()
         component_image_url = diode_component.get_image()
         component_characteristics = diode_component.get_data()
+    elif detected_component == 1:
+        component_name = resistor_component.get_name()
+        component_image_url = resistor_component.get_image()
+        component_characteristics = resistor_component.get_data()
+    elif detected_component & 2:
+        component_name = capacitor_component.get_name()
+        component_image_url = capacitor_component.get_image()
+        component_characteristics = capacitor_component.get_data()
 
+        
+    detected_component = 0
+    
     dynamic_data = {
         'tp1': str(tp1.get_v()),
         'tp2': str(tp2.get_v()),
@@ -140,13 +139,6 @@ def handle_request(conn):
     }
     
     rendered_content = template_content.format(**dynamic_data)
-
-
-    
-    '''     <p>Resistance: {measured_resistance} Ω</p>
-            <p>Capacitance: {measured_capacitance} F</p>
-            <p>Inductance: {measured_inductance} H</p>'''
-    
     
     response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n" + rendered_content
     
@@ -298,8 +290,8 @@ def measure_resistance_function(tp_x, tp_y, resistance):
 def measure_resistance():
     global detected_component
     global tp1, tp2, tp3
-    global measured_resistance
-    
+    global resistor_component
+
     temp_resistance1 = measure_resistance_function(tp1, tp2, 680)
     #print(temp_resistance1)
     
@@ -316,10 +308,10 @@ def measure_resistance():
     avg_resistance2 = (temp_resistance3 + temp_resistance4) / 2
     
     if avg_resistance1 < 10000:
-        measured_resistance = avg_resistance1
+        resistor_component = Resistor(avg_resistance1)
         print(avg_resistance1)
     else:
-        measured_resistance = avg_resistance2
+        resistor_component = Resistor(avg_resistance2)
         print(avg_resistance2)
     
     detected_component += 1
@@ -409,7 +401,9 @@ def capacitor_charge(tp_x, tp_y):
     return -1
 
 def measure_capacitance_test(tp_x, tp_y):
-
+    global capacitor_component
+    global detected_component
+    
     # Discharge the capacitor
     rc = capacitor_discharge(tp_x, tp_y)
     
@@ -429,8 +423,10 @@ def measure_capacitance_test(tp_x, tp_y):
         # treat capacitor not detected
         return
     
+    detected_component += 2
+
     capacitance = rc / 680 * 1000 # capacitance in uF
-    
+    capacitor_component = Capacitor(capacitance)
     debug('Capacitance: {0} uF'.format(capacitance))
 
 def measure_capacitance():
@@ -483,6 +479,7 @@ def test_diode(tp_x, tp_y):
     
 def measure_semiconductors():
     global tp1, tp2, tp3
+    global diode_component
     
     diode_detected = False
     forward_voltage = -1
@@ -492,6 +489,7 @@ def measure_semiconductors():
     
     if diode_detected:
         debug('Diode detected with Vf: {0}, cathode at {1} and anode at {2}'.format(forward_voltage, flow_direction[1], flow_direction[0]))
+        diode_component = Diode(forward_voltage, flow_direction)
     else:
         debug('Diode not detected between {0} and {1}'.format(flow_direction[1], flow_direction[0]))
     
