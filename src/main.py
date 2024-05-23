@@ -1,7 +1,7 @@
 from conf import *
 
 from machine import Pin, ADC, Timer
-from time import sleep, sleep_us, sleep_ms, ticks_ms, ticks_diff
+from time import sleep, sleep_us, sleep_ms, ticks_ms, ticks_diff, ticks_us
 import _thread
 import network
 import socket
@@ -21,6 +21,7 @@ tp1, tp2, tp3 = None, None, None
 resistor_component = Resistor(0)
 diode_component = Diode(0, [0, 0])
 capacitor_component = Capacitor(0)
+inductor_component = Inductor(0)
 
 detected_component = 0
 
@@ -101,7 +102,7 @@ def handle_request(conn):
     Returns:
         None
     """
-    global resistor_component, diode_component, capacitor_component
+    global resistor_component, diode_component, capacitor_component, inductor_component
     global detected_component
     template_content  = ""
     
@@ -111,7 +112,7 @@ def handle_request(conn):
     component_name = ''
     component_image_url = ''
     component_characteristics = ''
-
+    
     if detected_component & 3:    
         component_name = diode_component.get_name()
         component_image_url = diode_component.get_image()
@@ -124,7 +125,10 @@ def handle_request(conn):
         component_name = capacitor_component.get_name()
         component_image_url = capacitor_component.get_image()
         component_characteristics = capacitor_component.get_data()
-
+    elif detected_component & 8:
+        component_name = inductor_component.get_name()
+        component_image_url = inductor_component.get_image()
+        component_characteristics = inductor_component.get_data()
         
     detected_component = 0
     
@@ -434,6 +438,70 @@ def measure_capacitance():
     measure_capacitance_test(tp1, tp2)
     measure_capacitance_test(tp2, tp1)
 
+def inductor_discharge(tp_x, tp_y):
+    # Safety check
+    tp_x.set_r0_low()
+    tp_y.set_r1_low()
+    
+    # Pin shorting through the 680 Ohm resistor
+    
+    max_count_discharge = 4
+    discharge_index = 0
+
+    while tp_x.get_v() > 0.16 or tp_y.get_v() > 0.16:
+        sleep(0.2)
+        
+        debug('Discharging status: TP X: {0}, TP Y: {1}'.format(tp_x.get_v(), tp_y.get_v()))
+        discharge_index+=1
+        
+        if discharge_index > max_count_discharge:
+            debug('Discharge failed. Exiting...')
+            return -1
+
+    return 0
+
+def measure_inductance_test(tp_x, tp_y):
+    global inductor_component
+    global detected_component
+    
+    debug('Inductor test')
+    # Discharge the inductor
+    rc = inductor_discharge(tp_x, tp_y)
+    
+    if rc == -1:
+        # treat inductor big charge
+        return -1
+    
+    # Charge the inductor
+
+    time_us = 1
+    sleep(0.05)
+
+    tp_x.set_r1_low()
+    voltage = tp_x.get_v()
+    # debug("Initial voltage: {0}".format(voltage))
+
+
+    tp_y.set_r0_high()
+    sleep_us(time_us)
+    tp_y.set_r0_low()
+    
+    voltage = tp_x.get_v()
+
+
+    diff = time_us * 10**(-6)
+    #voltage = 2.05
+    inductance = - diff * 680 / math.log(1-voltage/3.3) * 1000 # inductance in mH
+    # debug("Uref: {0}, t: {1}, Inductance: {2}".format(voltage, diff, inductance))
+    detected_component += 8
+
+    inductor_component = Inductor(inductance)
+    debug('Inductance: {0} mH'.format(inductance))
+
+def measure_inductance():
+    global tp1, tp2, tp3
+    measure_inductance_test(tp1, tp2)
+
 def test_diode(tp_x, tp_y):
     diode_detected = False
     forward_voltage = -1
@@ -510,9 +578,10 @@ def measure_semiconductors():
     '''
 def measure_phase():
     
-    measure_capacitance()
-    measure_semiconductors()
-    measure_resistance()
+    measure_inductance()
+    #measure_capacitance()
+    #measure_semiconductors()
+    #measure_resistance()
     
     
 def main():

@@ -250,3 +250,15 @@ class Diode(Component):
 
     def get_forward_voltage(self):
         return self.forward_voltage
+
+class Inductor(Component):
+    def __init__(self, inductance = 0):
+        self.inductance = inductance
+        name = 'Inductor'
+        image = '<img loading="eager" width="128" height="128" src="https://symbols-electrical.getvecta.com/stencil_229/83_inductor.abada104a4.svg" alt="Inductor" title="Inductor" style="transform: rotate(90deg);">'
+        data = 'Inductance: {inductance} mH'
+        data = data.replace('{inductance}', str(inductance))
+        super().__init__(name, image, data)
+
+    def get_inductance(self):
+        return self.inductance
