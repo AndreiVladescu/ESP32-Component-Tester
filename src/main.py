@@ -112,8 +112,8 @@ def handle_request(conn):
     component_name = ''
     component_image_url = ''
     component_characteristics = ''
-    
-    if detected_component & 3:    
+
+    if detected_component == 3:    
         component_name = diode_component.get_name()
         component_image_url = diode_component.get_image()
         component_characteristics = diode_component.get_data()
@@ -121,7 +121,8 @@ def handle_request(conn):
         component_name = resistor_component.get_name()
         component_image_url = resistor_component.get_image()
         component_characteristics = resistor_component.get_data()
-    elif detected_component & 2:
+    elif detected_component == 2:
+        print('ok')
         component_name = capacitor_component.get_name()
         component_image_url = capacitor_component.get_image()
         component_characteristics = capacitor_component.get_data()
@@ -427,8 +428,7 @@ def measure_capacitance_test(tp_x, tp_y):
         # treat capacitor not detected
         return
     
-    detected_component += 2
-
+    detected_component = 2
     capacitance = rc / 680 * 1000 # capacitance in uF
     capacitor_component = Capacitor(capacitance)
     debug('Capacitance: {0} uF'.format(capacitance))
@@ -548,6 +548,7 @@ def test_diode(tp_x, tp_y):
 def measure_semiconductors():
     global tp1, tp2, tp3
     global diode_component
+    global detected_component
     
     diode_detected = False
     forward_voltage = -1
@@ -557,6 +558,7 @@ def measure_semiconductors():
     
     if diode_detected:
         debug('Diode detected with Vf: {0}, cathode at {1} and anode at {2}'.format(forward_voltage, flow_direction[1], flow_direction[0]))
+        detected_component = 3
         diode_component = Diode(forward_voltage, flow_direction)
     else:
         debug('Diode not detected between {0} and {1}'.format(flow_direction[1], flow_direction[0]))
@@ -578,10 +580,10 @@ def measure_semiconductors():
     '''
 def measure_phase():
     
-    measure_inductance()
+    #measure_inductance()
     #measure_capacitance()
     #measure_semiconductors()
-    #measure_resistance()
+    measure_resistance()
     
     
 def main():
