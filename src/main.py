@@ -113,7 +113,7 @@ def handle_request(conn):
     component_image_url = ''
     component_characteristics = ''
 
-    if detected_component == 3:    
+    if detected_component == 9:    
         component_name = diode_component.get_name()
         component_image_url = diode_component.get_image()
         component_characteristics = diode_component.get_data()
@@ -122,11 +122,10 @@ def handle_request(conn):
         component_image_url = resistor_component.get_image()
         component_characteristics = resistor_component.get_data()
     elif detected_component == 2:
-        print('ok')
         component_name = capacitor_component.get_name()
         component_image_url = capacitor_component.get_image()
         component_characteristics = capacitor_component.get_data()
-    elif detected_component & 8:
+    elif detected_component == 5:
         component_name = inductor_component.get_name()
         component_image_url = inductor_component.get_image()
         component_characteristics = inductor_component.get_data()
@@ -315,11 +314,13 @@ def measure_resistance():
     if avg_resistance1 < 10000:
         resistor_component = Resistor(avg_resistance1)
         print(avg_resistance1)
+        detected_component = detected_component | 1
     else:
         resistor_component = Resistor(avg_resistance2)
         print(avg_resistance2)
+        detected_component = detected_component | 1
     
-    detected_component += 1
+    
 
 def capacitor_discharge(tp_x, tp_y):
     # Safety check
@@ -428,7 +429,7 @@ def measure_capacitance_test(tp_x, tp_y):
         # treat capacitor not detected
         return
     
-    detected_component = 2
+    detected_component = detected_component | 2
     capacitance = rc / 680 * 1000 # capacitance in uF
     capacitor_component = Capacitor(capacitance)
     debug('Capacitance: {0} uF'.format(capacitance))
@@ -474,7 +475,7 @@ def measure_inductance_test(tp_x, tp_y):
     
     # Charge the inductor
 
-    time_us = 1
+    time_us = 10
     sleep(0.05)
 
     tp_x.set_r1_low()
@@ -493,7 +494,7 @@ def measure_inductance_test(tp_x, tp_y):
     #voltage = 2.05
     inductance = - diff * 680 / math.log(1-voltage/3.3) * 1000 # inductance in mH
     # debug("Uref: {0}, t: {1}, Inductance: {2}".format(voltage, diff, inductance))
-    detected_component += 8
+    detected_component = detected_component | 4
 
     inductor_component = Inductor(inductance)
     debug('Inductance: {0} mH'.format(inductance))
@@ -558,7 +559,7 @@ def measure_semiconductors():
     
     if diode_detected:
         debug('Diode detected with Vf: {0}, cathode at {1} and anode at {2}'.format(forward_voltage, flow_direction[1], flow_direction[0]))
-        detected_component = 3
+        detected_component = detected_component | 8
         diode_component = Diode(forward_voltage, flow_direction)
     else:
         debug('Diode not detected between {0} and {1}'.format(flow_direction[1], flow_direction[0]))
@@ -582,8 +583,8 @@ def measure_phase():
     
     #measure_inductance()
     #measure_capacitance()
-    #measure_semiconductors()
-    measure_resistance()
+    measure_semiconductors()
+    #measure_resistance()
     
     
 def main():
