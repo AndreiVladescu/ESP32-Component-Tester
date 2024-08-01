@@ -1,0 +1,1311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>C:\Users\Admin\Documents\GitHub\ESP32-Component-Tester\pcb\esp32-comp-tester.kicad_sch</source>
+    <date>5/25/2024 2:17:52 PM</date>
+    <tool>Eeschema 7.0.10</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date/>
+        <source>esp32-comp-tester.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="C1">
+      <value>22uF</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <libsource lib="pspice" part="C" description="Capacitor symbol for simulation only"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Capacitor symbol for simulation only"/>
+      <property name="ki_keywords" value="simulation"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>07ce9840-2472-42af-82f8-bf5422153c7b</tstamps>
+    </comp>
+    <comp ref="C2">
+      <value>22uF</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <libsource lib="pspice" part="C" description="Capacitor symbol for simulation only"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Capacitor symbol for simulation only"/>
+      <property name="ki_keywords" value="simulation"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>753998e6-8a5c-41d9-a605-4256bded8767</tstamps>
+    </comp>
+    <comp ref="C3">
+      <value>22uF</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1600af4c-60e6-4e77-afbf-64f017d82118</tstamps>
+    </comp>
+    <comp ref="C4">
+      <value>0.1uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="pspice" part="C" description="Capacitor symbol for simulation only"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Capacitor symbol for simulation only"/>
+      <property name="ki_keywords" value="simulation"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>eba52aba-2fcb-4096-8bd4-f6a8f8ceebe4</tstamps>
+    </comp>
+    <comp ref="C5">
+      <value>0.1uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="pspice" part="C" description="Capacitor symbol for simulation only"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Capacitor symbol for simulation only"/>
+      <property name="ki_keywords" value="simulation"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>022ad381-b52b-44f6-839e-174a5d0686df</tstamps>
+    </comp>
+    <comp ref="C6">
+      <value>0.1uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <libsource lib="pspice" part="C" description="Capacitor symbol for simulation only"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Capacitor symbol for simulation only"/>
+      <property name="ki_keywords" value="simulation"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>806cd49c-83a9-42d1-99ec-dcf684118d9c</tstamps>
+    </comp>
+    <comp ref="D1">
+      <value>LED</value>
+      <footprint>LED_SMD:LED_1206_3216Metric</footprint>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Light emitting diode"/>
+      <property name="ki_keywords" value="LED diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>fd8d6e40-d198-43f7-97c7-fd0b3c1e1112</tstamps>
+    </comp>
+    <comp ref="J1">
+      <value>PWR JST</value>
+      <footprint>Connector_PinSocket_2.54mm:PinSocket_1x02_P2.54mm_Vertical</footprint>
+      <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c221e6b0-e424-422c-b780-c08b217d77df</tstamps>
+    </comp>
+    <comp ref="J2">
+      <value>USB_A</value>
+      <footprint>Connector_USB:USB_A_Molex_48037-2200_Horizontal</footprint>
+      <datasheet> ~</datasheet>
+      <libsource lib="Connector" part="USB_A" description="USB Type A connector"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="USB Type A connector"/>
+      <property name="ki_keywords" value="connector USB"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d5f6292c-ee17-4fc3-8e5f-0a8cc4cf8256</tstamps>
+    </comp>
+    <comp ref="J3">
+      <value>UART_JST</value>
+      <footprint>Connector_PinSocket_2.54mm:PinSocket_1x02_P2.54mm_Vertical</footprint>
+      <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>36dd5b4d-41f1-4611-933d-3a629b43d3af</tstamps>
+    </comp>
+    <comp ref="J4">
+      <value>ZIF Test Point Socket</value>
+      <footprint>Package_DIP:DIP-14_W7.62mm_Socket</footprint>
+      <libsource lib="Connector" part="Conn_01x14_Female" description="Generic connector, single row, 01x14, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Generic connector, single row, 01x14, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>20d73e8a-41b8-46df-92b3-4251b77222f2</tstamps>
+    </comp>
+    <comp ref="J5">
+      <value>Screen SPI Data</value>
+      <footprint>Connector_JST:JST_EH_B4B-EH-A_1x04_P2.50mm_Vertical</footprint>
+      <libsource lib="Connector" part="Conn_01x04_Pin" description="Generic connector, single row, 01x04, script generated"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Generic connector, single row, 01x04, script generated"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>edd4f9b5-8e56-45b6-9651-943cfe53dad7</tstamps>
+    </comp>
+    <comp ref="J6">
+      <value>Screen Power Pins</value>
+      <footprint>Connector_JST:JST_EH_B3B-EH-A_1x03_P2.50mm_Vertical</footprint>
+      <libsource lib="Connector" part="Conn_01x03_Pin" description="Generic connector, single row, 01x03, script generated"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Generic connector, single row, 01x03, script generated"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>193de63e-30b5-48b3-9e8e-3ae89c1f9c81</tstamps>
+    </comp>
+    <comp ref="J7">
+      <value>AVR-JTAG-10</value>
+      <footprint>Connector_IDC:IDC-Header_2x05_P2.54mm_Vertical</footprint>
+      <datasheet> ~</datasheet>
+      <libsource lib="Connector" part="AVR-JTAG-10" description="Atmel 10-pin JTAG connector"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Atmel 10-pin JTAG connector"/>
+      <property name="ki_keywords" value="AVR JTAG Connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>da95e9a9-71d5-4627-972f-c04fc8a790e0</tstamps>
+    </comp>
+    <comp ref="R1">
+      <value>680R</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>faaffe76-9870-4670-b5dd-e93a63ab1268</tstamps>
+    </comp>
+    <comp ref="R2">
+      <value>470k</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>cfc33990-19a0-45b4-b65f-5fdb9e6f0498</tstamps>
+    </comp>
+    <comp ref="R3">
+      <value>680R</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ff8d95db-9054-4bfe-8330-bd9d073d2f0f</tstamps>
+    </comp>
+    <comp ref="R4">
+      <value>470k</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>344040dd-96be-4c1a-928c-723917ea832e</tstamps>
+    </comp>
+    <comp ref="R5">
+      <value>680R</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8b070b5f-f9a5-46d1-8f2e-8c3e6edc0343</tstamps>
+    </comp>
+    <comp ref="R6">
+      <value>470k</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1ecf4a33-06be-4501-9eb2-448451c8eb74</tstamps>
+    </comp>
+    <comp ref="R7">
+      <value>680</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6c709a07-4a77-4a3c-8676-ae9126165ff5</tstamps>
+    </comp>
+    <comp ref="R8">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>2bf6355f-558b-4b30-9923-289f1c8e7505</tstamps>
+    </comp>
+    <comp ref="SW1">
+      <value>SW_Push</value>
+      <footprint>Button_Switch_SMD:SW_SPST_B3S-1000</footprint>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Push button switch, generic, two pins"/>
+      <property name="ki_keywords" value="switch normally-open pushbutton push-button"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7db9f9f0-9240-45a0-b47d-df832679fb95</tstamps>
+    </comp>
+    <comp ref="SW2">
+      <value>SW_Push</value>
+      <footprint>Button_Switch_SMD:SW_SPST_B3S-1000</footprint>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Push button switch, generic, two pins"/>
+      <property name="ki_keywords" value="switch normally-open pushbutton push-button"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0a97c5ca-727b-4ac2-8f45-d57821dddbf7</tstamps>
+    </comp>
+    <comp ref="SW3">
+      <value>Measure Push Button</value>
+      <footprint>Button_Switch_SMD:SW_SPST_B3S-1100</footprint>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="Push button switch, generic, two pins"/>
+      <property name="ki_keywords" value="switch normally-open pushbutton push-button"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>2040ec86-6ef0-4f33-8bda-2bdd28df7bd0</tstamps>
+    </comp>
+    <comp ref="TP1">
+      <value>TP_A</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1bea48c9-6753-4283-97b8-5d7d7ccedc98</tstamps>
+    </comp>
+    <comp ref="TP2">
+      <value>TP_B</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d7a55b1a-2818-4f5e-b9db-8e663b2effc1</tstamps>
+    </comp>
+    <comp ref="TP3">
+      <value>TP_C</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6ea21f34-cc7b-4430-a00e-370bd632c7c9</tstamps>
+    </comp>
+    <comp ref="TP4">
+      <value>TP_RX</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>de4bb9b2-3ad3-4754-8df7-19488461dee8</tstamps>
+    </comp>
+    <comp ref="TP5">
+      <value>TP_TX</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>955e5f15-b656-40f8-9f4d-aa93b74f82ba</tstamps>
+    </comp>
+    <comp ref="TP6">
+      <value>TP_GND</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c2a65979-3c9e-4cb4-9458-f0d6c362cb8f</tstamps>
+    </comp>
+    <comp ref="TP7">
+      <value>TP_GND</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4aa2d669-c29c-4918-baea-f7d1e34b3b62</tstamps>
+    </comp>
+    <comp ref="TP8">
+      <value>TP_3.3V</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a7901670-62fb-47fb-9df2-79fdd6c6e861</tstamps>
+    </comp>
+    <comp ref="TP9">
+      <value>TP_3.3V</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>9b2e5991-6dbf-45d7-b29f-1dc2b97d3071</tstamps>
+    </comp>
+    <comp ref="TP10">
+      <value>GPIO_22</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a3191fdf-338f-4c29-9571-a30488ead087</tstamps>
+    </comp>
+    <comp ref="TP11">
+      <value>GPIO_21</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>79c3d18f-b117-4490-b388-c09021fa8881</tstamps>
+    </comp>
+    <comp ref="TP12">
+      <value>GPIO_16</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7fc7a3fc-c307-4814-b0d5-85374d65d3b6</tstamps>
+    </comp>
+    <comp ref="TP13">
+      <value>TP_3.3V</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ab8ddcad-0fcc-451e-9493-6ba54f695bb6</tstamps>
+    </comp>
+    <comp ref="TP14">
+      <value>GPIO_4</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1dd56aa4-28b7-4858-a0f0-d4270654d206</tstamps>
+    </comp>
+    <comp ref="TP15">
+      <value>GPIO_36</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>2486fe15-fe80-4b9f-92e9-529bcb0b0533</tstamps>
+    </comp>
+    <comp ref="TP16">
+      <value>SRST</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>13373297-ba1a-4506-a2e2-d11a8353ce53</tstamps>
+    </comp>
+    <comp ref="TP17">
+      <value>TRST</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8e3fce8f-18a2-4d48-a05c-c7dfff75f9be</tstamps>
+    </comp>
+    <comp ref="TP18">
+      <value>CTS</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7a332a2d-1e69-4dfe-aaa0-c02c616cd4d4</tstamps>
+    </comp>
+    <comp ref="TP19">
+      <value>DSR</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d8018778-2745-4d05-b85a-51b7a41c8171</tstamps>
+    </comp>
+    <comp ref="TP20">
+      <value>RI</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e4d0da5c-8d1a-411b-aadb-908e9d57e542</tstamps>
+    </comp>
+    <comp ref="TP21">
+      <value>DCD</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>5dcee970-8690-437d-b5ef-c1e340df1bf4</tstamps>
+    </comp>
+    <comp ref="TP22">
+      <value>DTR</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4c575a40-a647-47c9-8126-9af56103e99b</tstamps>
+    </comp>
+    <comp ref="TP23">
+      <value>RTS</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e169f65d-fe75-4d1f-94ad-b2b41c6c91ee</tstamps>
+    </comp>
+    <comp ref="TP24">
+      <value>XI</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4bf93056-480b-448c-b3ca-4904412ce85d</tstamps>
+    </comp>
+    <comp ref="TP25">
+      <value>X0</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a89639fe-4d89-4781-9ebb-c04ff0c2c3df</tstamps>
+    </comp>
+    <comp ref="TP26">
+      <value>R232</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a0176113-1d64-4a53-b6cf-11e89756746a</tstamps>
+    </comp>
+    <comp ref="TP27">
+      <value>V3_CH340g</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e4803214-b791-4a5f-a0c1-a72220982f3d</tstamps>
+    </comp>
+    <comp ref="TP28">
+      <value>SCS</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>da34c06e-862c-41d9-ab69-ed00a727af84</tstamps>
+    </comp>
+    <comp ref="TP29">
+      <value>SCK</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d0b0764b-3e4e-4d60-9abb-bc7924cab7e1</tstamps>
+    </comp>
+    <comp ref="TP30">
+      <value>SWP</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e136acd9-e5d1-4113-9ea0-6dc2799d81cc</tstamps>
+    </comp>
+    <comp ref="TP31">
+      <value>SHD</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>fe6804a0-ea04-4557-9464-077215814612</tstamps>
+    </comp>
+    <comp ref="TP32">
+      <value>SDI</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>9688c911-87b4-4ef0-926a-96aa2bf4d2ae</tstamps>
+    </comp>
+    <comp ref="TP33">
+      <value>SDO</value>
+      <footprint>TestPoint:TestPoint_Pad_D2.0mm</footprint>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="test point"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>5cb88989-7bd0-4383-9348-418a2915ddd5</tstamps>
+    </comp>
+    <comp ref="U1">
+      <value>ESP32-WROOM-32</value>
+      <footprint>RF_Module:ESP32-WROOM-32</footprint>
+      <datasheet>https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32_datasheet_en.pdf</datasheet>
+      <libsource lib="RF_Module" part="ESP32-WROOM-32" description="RF Module, ESP32-D0WDQ6 SoC, Wi-Fi 802.11b/g/n, Bluetooth, BLE, 32-bit, 2.7-3.6V, onboard antenna, SMD"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="RF Module, ESP32-D0WDQ6 SoC, Wi-Fi 802.11b/g/n, Bluetooth, BLE, 32-bit, 2.7-3.6V, onboard antenna, SMD"/>
+      <property name="ki_keywords" value="RF Radio BT ESP ESP32 Espressif onboard PCB antenna"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>652c6b30-c8ec-40d2-bc51-c42e56ab5854</tstamps>
+    </comp>
+    <comp ref="U2">
+      <value>AMS1117-3.3</value>
+      <footprint>Package_TO_SOT_SMD:SOT-223-3_TabPin2</footprint>
+      <datasheet>http://www.advanced-monolithic.com/pdf/ds1117.pdf</datasheet>
+      <libsource lib="Regulator_Linear" part="AMS1117-3.3" description="1A Low Dropout regulator, positive, 3.3V fixed output, SOT-223"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="1A Low Dropout regulator, positive, 3.3V fixed output, SOT-223"/>
+      <property name="ki_keywords" value="linear regulator ldo fixed positive"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e1ab59ef-c5dc-4317-a0d3-b43ff330509a</tstamps>
+    </comp>
+    <comp ref="U3">
+      <value>CH340G</value>
+      <footprint>Package_SO:SOIC-16_3.9x9.9mm_P1.27mm</footprint>
+      <datasheet>http://www.datasheet5.com/pdf-local-2195953</datasheet>
+      <libsource lib="Interface_USB" part="CH340G" description="USB serial converter, UART, SOIC-16"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="esp32-comp-tester.kicad_sch"/>
+      <property name="ki_description" value="USB serial converter, UART, SOIC-16"/>
+      <property name="ki_keywords" value="USB UART Serial Converter Interface"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>eee5450f-3af7-45be-bb26-70a0b8c9520b</tstamps>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Connector" part="AVR-JTAG-10">
+      <description>Atmel 10-pin JTAG connector</description>
+      <docs> ~</docs>
+      <footprints>
+        <fp>IDC?Header*2x05*</fp>
+        <fp>Pin?Header*2x05*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">AVR-JTAG-10</field>
+        <field name="Datasheet"> ~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="TCK" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+        <pin num="3" name="TDO" type="passive"/>
+        <pin num="4" name="VREF" type="passive"/>
+        <pin num="5" name="TMS" type="passive"/>
+        <pin num="6" name="~{SRST}" type="passive"/>
+        <pin num="7" name="VCC" type="passive"/>
+        <pin num="8" name="~{TRST}" type="passive"/>
+        <pin num="9" name="TDI" type="passive"/>
+        <pin num="10" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector" part="Conn_01x02_Male">
+      <description>Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x02_Male</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector" part="Conn_01x03_Pin">
+      <description>Generic connector, single row, 01x03, script generated</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x03_Pin</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector" part="Conn_01x04_Pin">
+      <description>Generic connector, single row, 01x04, script generated</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x04_Pin</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector" part="Conn_01x14_Female">
+      <description>Generic connector, single row, 01x14, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x14_Female</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+        <pin num="6" name="Pin_6" type="passive"/>
+        <pin num="7" name="Pin_7" type="passive"/>
+        <pin num="8" name="Pin_8" type="passive"/>
+        <pin num="9" name="Pin_9" type="passive"/>
+        <pin num="10" name="Pin_10" type="passive"/>
+        <pin num="11" name="Pin_11" type="passive"/>
+        <pin num="12" name="Pin_12" type="passive"/>
+        <pin num="13" name="Pin_13" type="passive"/>
+        <pin num="14" name="Pin_14" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector" part="TestPoint">
+      <description>test point</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Pin*</fp>
+        <fp>Test*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">TP</field>
+        <field name="Value">TestPoint</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector" part="USB_A">
+      <description>USB Type A connector</description>
+      <docs> ~</docs>
+      <footprints>
+        <fp>USB*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">USB_A</field>
+        <field name="Datasheet"> ~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VBUS" type="power_in"/>
+        <pin num="2" name="D-" type="bidirectional"/>
+        <pin num="3" name="D+" type="bidirectional"/>
+        <pin num="4" name="GND" type="power_in"/>
+        <pin num="5" name="Shield" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="C">
+      <description>Unpolarized capacitor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="LED">
+      <description>Light emitting diode</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>LED*</fp>
+        <fp>LED_SMD:*</fp>
+        <fp>LED_THT:*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R">
+      <description>Resistor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Interface_USB" part="CH340G">
+      <description>USB serial converter, UART, SOIC-16</description>
+      <docs>http://www.datasheet5.com/pdf-local-2195953</docs>
+      <footprints>
+        <fp>SOIC*3.9x9.9mm*P1.27mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">CH340G</field>
+        <field name="Footprint">Package_SO:SOIC-16_3.9x9.9mm_P1.27mm</field>
+        <field name="Datasheet">http://www.datasheet5.com/pdf-local-2195953</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="TXD" type="output"/>
+        <pin num="3" name="RXD" type="input"/>
+        <pin num="4" name="V3" type="passive"/>
+        <pin num="5" name="UD+" type="bidirectional"/>
+        <pin num="6" name="UD-" type="bidirectional"/>
+        <pin num="7" name="XI" type="input"/>
+        <pin num="8" name="XO" type="output"/>
+        <pin num="9" name="~{CTS}" type="input"/>
+        <pin num="10" name="~{DSR}" type="input"/>
+        <pin num="11" name="~{RI}" type="input"/>
+        <pin num="12" name="~{DCD}" type="input"/>
+        <pin num="13" name="~{DTR}" type="output"/>
+        <pin num="14" name="~{RTS}" type="output"/>
+        <pin num="15" name="R232" type="input"/>
+        <pin num="16" name="VCC" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="RF_Module" part="ESP32-WROOM-32">
+      <description>RF Module, ESP32-D0WDQ6 SoC, Wi-Fi 802.11b/g/n, Bluetooth, BLE, 32-bit, 2.7-3.6V, onboard antenna, SMD</description>
+      <docs>https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32_datasheet_en.pdf</docs>
+      <footprints>
+        <fp>ESP32?WROOM?32*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">ESP32-WROOM-32</field>
+        <field name="Footprint">RF_Module:ESP32-WROOM-32</field>
+        <field name="Datasheet">https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32_datasheet_en.pdf</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="VDD" type="power_in"/>
+        <pin num="3" name="EN" type="input"/>
+        <pin num="4" name="SENSOR_VP" type="input"/>
+        <pin num="5" name="SENSOR_VN" type="input"/>
+        <pin num="6" name="IO34" type="input"/>
+        <pin num="7" name="IO35" type="input"/>
+        <pin num="8" name="IO32" type="bidirectional"/>
+        <pin num="9" name="IO33" type="bidirectional"/>
+        <pin num="10" name="IO25" type="bidirectional"/>
+        <pin num="11" name="IO26" type="bidirectional"/>
+        <pin num="12" name="IO27" type="bidirectional"/>
+        <pin num="13" name="IO14" type="bidirectional"/>
+        <pin num="14" name="IO12" type="bidirectional"/>
+        <pin num="15" name="GND" type="passive"/>
+        <pin num="16" name="IO13" type="bidirectional"/>
+        <pin num="17" name="SHD/SD2" type="bidirectional"/>
+        <pin num="18" name="SWP/SD3" type="bidirectional"/>
+        <pin num="19" name="SCS/CMD" type="bidirectional"/>
+        <pin num="20" name="SCK/CLK" type="bidirectional"/>
+        <pin num="21" name="SDO/SD0" type="bidirectional"/>
+        <pin num="22" name="SDI/SD1" type="bidirectional"/>
+        <pin num="23" name="IO15" type="bidirectional"/>
+        <pin num="24" name="IO2" type="bidirectional"/>
+        <pin num="25" name="IO0" type="bidirectional"/>
+        <pin num="26" name="IO4" type="bidirectional"/>
+        <pin num="27" name="IO16" type="bidirectional"/>
+        <pin num="28" name="IO17" type="bidirectional"/>
+        <pin num="29" name="IO5" type="bidirectional"/>
+        <pin num="30" name="IO18" type="bidirectional"/>
+        <pin num="31" name="IO19" type="bidirectional"/>
+        <pin num="32" name="NC" type="no_connect"/>
+        <pin num="33" name="IO21" type="bidirectional"/>
+        <pin num="34" name="RXD0/IO3" type="bidirectional"/>
+        <pin num="35" name="TXD0/IO1" type="bidirectional"/>
+        <pin num="36" name="IO22" type="bidirectional"/>
+        <pin num="37" name="IO23" type="bidirectional"/>
+        <pin num="38" name="GND" type="passive"/>
+        <pin num="39" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Regulator_Linear" part="AMS1117-3.3">
+      <description>1A Low Dropout regulator, positive, 3.3V fixed output, SOT-223</description>
+      <docs>http://www.advanced-monolithic.com/pdf/ds1117.pdf</docs>
+      <footprints>
+        <fp>SOT?223*TabPin2*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">AMS1117-3.3</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-223-3_TabPin2</field>
+        <field name="Datasheet">http://www.advanced-monolithic.com/pdf/ds1117.pdf</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="VO" type="power_out"/>
+        <pin num="3" name="VI" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="Switch" part="SW_Push">
+      <description>Push button switch, generic, two pins</description>
+      <docs>~</docs>
+      <fields>
+        <field name="Reference">SW</field>
+        <field name="Value">SW_Push</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="pspice" part="C">
+      <description>Capacitor symbol for simulation only</description>
+      <docs>~</docs>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Connector">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Connector.kicad_sym</uri>
+    </library>
+    <library logical="Device">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Device.kicad_sym</uri>
+    </library>
+    <library logical="Interface_USB">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Interface_USB.kicad_sym</uri>
+    </library>
+    <library logical="RF_Module">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/RF_Module.kicad_sym</uri>
+    </library>
+    <library logical="Regulator_Linear">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Regulator_Linear.kicad_sym</uri>
+    </library>
+    <library logical="Switch">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Switch.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="+3.3V">
+      <node ref="C2" pin="1" pintype="passive"/>
+      <node ref="C3" pin="1" pintype="passive"/>
+      <node ref="D1" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="J6" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="J7" pin="4" pinfunction="VREF" pintype="passive"/>
+      <node ref="J7" pin="7" pinfunction="VCC" pintype="passive"/>
+      <node ref="R8" pin="1" pintype="passive"/>
+      <node ref="TP8" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="TP9" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="2" pinfunction="VDD" pintype="power_in"/>
+      <node ref="U2" pin="2" pinfunction="VO" pintype="power_out"/>
+    </net>
+    <net code="2" name="+5V">
+      <node ref="C1" pin="1" pintype="passive"/>
+      <node ref="J1" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="J2" pin="1" pinfunction="VBUS" pintype="power_in"/>
+      <node ref="J6" pin="3" pinfunction="Pin_3" pintype="passive"/>
+      <node ref="U2" pin="3" pinfunction="VI" pintype="power_in"/>
+      <node ref="U3" pin="16" pinfunction="VCC" pintype="power_in"/>
+    </net>
+    <net code="3" name="/ADC1_CH3_TP1">
+      <node ref="J4" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="J4" pin="10" pinfunction="Pin_10" pintype="passive"/>
+      <node ref="J4" pin="11" pinfunction="Pin_11" pintype="passive"/>
+      <node ref="J4" pin="14" pinfunction="Pin_14" pintype="passive"/>
+      <node ref="J4" pin="4" pinfunction="Pin_4" pintype="passive"/>
+      <node ref="J4" pin="5" pinfunction="Pin_5" pintype="passive"/>
+      <node ref="J4" pin="6" pinfunction="Pin_6" pintype="passive"/>
+      <node ref="J4" pin="7" pinfunction="Pin_7" pintype="passive"/>
+      <node ref="J4" pin="8" pinfunction="Pin_8" pintype="passive"/>
+      <node ref="J4" pin="9" pinfunction="Pin_9" pintype="passive"/>
+      <node ref="R1" pin="2" pintype="passive"/>
+      <node ref="R2" pin="2" pintype="passive"/>
+      <node ref="TP1" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="5" pinfunction="SENSOR_VN" pintype="input"/>
+      <node ref="U1" pin="9" pinfunction="IO33" pintype="bidirectional"/>
+    </net>
+    <net code="4" name="/ADC1_CH6_TP2">
+      <node ref="J4" pin="13" pinfunction="Pin_13" pintype="passive"/>
+      <node ref="J4" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="R3" pin="2" pintype="passive"/>
+      <node ref="R4" pin="2" pintype="passive"/>
+      <node ref="TP2" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="11" pinfunction="IO26" pintype="bidirectional"/>
+      <node ref="U1" pin="6" pinfunction="IO34" pintype="input"/>
+    </net>
+    <net code="5" name="/ADC1_CH7_TP3">
+      <node ref="J4" pin="12" pinfunction="Pin_12" pintype="passive"/>
+      <node ref="J4" pin="3" pinfunction="Pin_3" pintype="passive"/>
+      <node ref="J7" pin="9" pinfunction="TDI" pintype="passive"/>
+      <node ref="R5" pin="2" pintype="passive"/>
+      <node ref="R6" pin="2" pintype="passive"/>
+      <node ref="TP3" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="14" pinfunction="IO12" pintype="bidirectional"/>
+      <node ref="U1" pin="7" pinfunction="IO35" pintype="input"/>
+    </net>
+    <net code="6" name="/EN">
+      <node ref="C4" pin="1" pintype="passive"/>
+      <node ref="C6" pin="2" pintype="passive"/>
+      <node ref="R8" pin="2" pintype="passive"/>
+      <node ref="SW2" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="U1" pin="3" pinfunction="EN" pintype="input"/>
+    </net>
+    <net code="7" name="/ESP_RX">
+      <node ref="J3" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="TP4" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="34" pinfunction="RXD0/IO3" pintype="bidirectional"/>
+      <node ref="U3" pin="2" pinfunction="TXD" pintype="output"/>
+    </net>
+    <net code="8" name="/ESP_TX">
+      <node ref="J3" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="TP5" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="35" pinfunction="TXD0/IO1" pintype="bidirectional"/>
+      <node ref="U3" pin="3" pinfunction="RXD" pintype="input"/>
+    </net>
+    <net code="9" name="/IO0">
+      <node ref="C5" pin="1" pintype="passive"/>
+      <node ref="SW1" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="25" pinfunction="IO0" pintype="bidirectional"/>
+    </net>
+    <net code="10" name="/MEAS_PIN">
+      <node ref="SW3" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="28" pinfunction="IO17" pintype="bidirectional"/>
+    </net>
+    <net code="11" name="/R1_TP1">
+      <node ref="R1" pin="1" pintype="passive"/>
+      <node ref="U1" pin="8" pinfunction="IO32" pintype="bidirectional"/>
+    </net>
+    <net code="12" name="/R1_TP2">
+      <node ref="R3" pin="1" pintype="passive"/>
+      <node ref="U1" pin="12" pinfunction="IO27" pintype="bidirectional"/>
+    </net>
+    <net code="13" name="/R1_TP3">
+      <node ref="J7" pin="1" pinfunction="TCK" pintype="passive"/>
+      <node ref="R5" pin="1" pintype="passive"/>
+      <node ref="U1" pin="16" pinfunction="IO13" pintype="bidirectional"/>
+    </net>
+    <net code="14" name="/R2_TP1">
+      <node ref="R2" pin="1" pintype="passive"/>
+      <node ref="U1" pin="10" pinfunction="IO25" pintype="bidirectional"/>
+    </net>
+    <net code="15" name="/R2_TP2">
+      <node ref="J7" pin="5" pinfunction="TMS" pintype="passive"/>
+      <node ref="R4" pin="1" pintype="passive"/>
+      <node ref="U1" pin="13" pinfunction="IO14" pintype="bidirectional"/>
+    </net>
+    <net code="16" name="/R2_TP3">
+      <node ref="J7" pin="3" pinfunction="TDO" pintype="passive"/>
+      <node ref="R6" pin="1" pintype="passive"/>
+      <node ref="U1" pin="23" pinfunction="IO15" pintype="bidirectional"/>
+    </net>
+    <net code="17" name="/USB+">
+      <node ref="J2" pin="3" pinfunction="D+" pintype="bidirectional"/>
+      <node ref="U3" pin="5" pinfunction="UD+" pintype="bidirectional"/>
+    </net>
+    <net code="18" name="/USB-">
+      <node ref="J2" pin="2" pinfunction="D-" pintype="bidirectional"/>
+      <node ref="U3" pin="6" pinfunction="UD-" pintype="bidirectional"/>
+    </net>
+    <net code="19" name="/VSPI_CLK">
+      <node ref="J5" pin="4" pinfunction="Pin_4" pintype="passive"/>
+      <node ref="U1" pin="30" pinfunction="IO18" pintype="bidirectional"/>
+    </net>
+    <net code="20" name="/VSPI_CS">
+      <node ref="J5" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="U1" pin="29" pinfunction="IO5" pintype="bidirectional"/>
+    </net>
+    <net code="21" name="/VSPI_MISO">
+      <node ref="J5" pin="3" pinfunction="Pin_3" pintype="passive"/>
+      <node ref="U1" pin="31" pinfunction="IO19" pintype="bidirectional"/>
+    </net>
+    <net code="22" name="/VSPI_MOSI">
+      <node ref="J5" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="U1" pin="37" pinfunction="IO23" pintype="bidirectional"/>
+    </net>
+    <net code="23" name="GND">
+      <node ref="C1" pin="2" pintype="passive"/>
+      <node ref="C2" pin="2" pintype="passive"/>
+      <node ref="C3" pin="2" pintype="passive"/>
+      <node ref="C4" pin="2" pintype="passive"/>
+      <node ref="C5" pin="2" pintype="passive"/>
+      <node ref="C6" pin="1" pintype="passive"/>
+      <node ref="J1" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="J2" pin="4" pinfunction="GND" pintype="power_in"/>
+      <node ref="J2" pin="5" pinfunction="Shield" pintype="passive"/>
+      <node ref="J6" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="J7" pin="10" pinfunction="GND" pintype="passive"/>
+      <node ref="J7" pin="2" pinfunction="GND" pintype="passive"/>
+      <node ref="R7" pin="2" pintype="passive"/>
+      <node ref="SW1" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="SW2" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="SW3" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="TP6" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="TP7" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="1" pinfunction="GND" pintype="power_in"/>
+      <node ref="U1" pin="15" pinfunction="GND" pintype="passive"/>
+      <node ref="U1" pin="38" pinfunction="GND" pintype="passive"/>
+      <node ref="U1" pin="39" pinfunction="GND" pintype="passive"/>
+      <node ref="U2" pin="1" pinfunction="GND" pintype="power_in"/>
+      <node ref="U3" pin="1" pinfunction="GND" pintype="power_in"/>
+    </net>
+    <net code="24" name="Net-(D1-K)">
+      <node ref="D1" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="R7" pin="1" pintype="passive"/>
+    </net>
+    <net code="25" name="Net-(J7-~{SRST})">
+      <node ref="J7" pin="6" pinfunction="~{SRST}" pintype="passive"/>
+      <node ref="TP16" pin="1" pinfunction="1" pintype="passive"/>
+    </net>
+    <net code="26" name="Net-(J7-~{TRST})">
+      <node ref="J7" pin="8" pinfunction="~{TRST}" pintype="passive"/>
+      <node ref="TP17" pin="1" pinfunction="1" pintype="passive"/>
+    </net>
+    <net code="27" name="Net-(U1-IO2)">
+      <node ref="TP13" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="24" pinfunction="IO2" pintype="bidirectional"/>
+    </net>
+    <net code="28" name="Net-(U1-IO4)">
+      <node ref="TP14" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="26" pinfunction="IO4" pintype="bidirectional"/>
+    </net>
+    <net code="29" name="Net-(U1-IO16)">
+      <node ref="TP12" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="27" pinfunction="IO16" pintype="bidirectional"/>
+    </net>
+    <net code="30" name="Net-(U1-IO21)">
+      <node ref="TP11" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="33" pinfunction="IO21" pintype="bidirectional"/>
+    </net>
+    <net code="31" name="Net-(U1-IO22)">
+      <node ref="TP10" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="36" pinfunction="IO22" pintype="bidirectional"/>
+    </net>
+    <net code="32" name="Net-(U1-SCK{slash}CLK)">
+      <node ref="TP29" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="20" pinfunction="SCK/CLK" pintype="bidirectional"/>
+    </net>
+    <net code="33" name="Net-(U1-SCS{slash}CMD)">
+      <node ref="TP28" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="19" pinfunction="SCS/CMD" pintype="bidirectional"/>
+    </net>
+    <net code="34" name="Net-(U1-SDI{slash}SD1)">
+      <node ref="TP32" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="22" pinfunction="SDI/SD1" pintype="bidirectional"/>
+    </net>
+    <net code="35" name="Net-(U1-SDO{slash}SD0)">
+      <node ref="TP33" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="21" pinfunction="SDO/SD0" pintype="bidirectional"/>
+    </net>
+    <net code="36" name="Net-(U1-SENSOR_VP)">
+      <node ref="TP15" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="4" pinfunction="SENSOR_VP" pintype="input"/>
+    </net>
+    <net code="37" name="Net-(U1-SHD{slash}SD2)">
+      <node ref="TP31" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="17" pinfunction="SHD/SD2" pintype="bidirectional"/>
+    </net>
+    <net code="38" name="Net-(U1-SWP{slash}SD3)">
+      <node ref="TP30" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="18" pinfunction="SWP/SD3" pintype="bidirectional"/>
+    </net>
+    <net code="39" name="Net-(U3-R232)">
+      <node ref="TP26" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U3" pin="15" pinfunction="R232" pintype="input"/>
+    </net>
+    <net code="40" name="Net-(U3-V3)">
+      <node ref="TP27" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U3" pin="4" pinfunction="V3" pintype="passive"/>
+    </net>
+    <net code="41" name="Net-(U3-XI)">
+      <node ref="TP24" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U3" pin="7" pinfunction="XI" pintype="input"/>
+    </net>
+    <net code="42" name="Net-(U3-XO)">
+      <node ref="TP25" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U3" pin="8" pinfunction="XO" pintype="output"/>
+    </net>
+    <net code="43" name="Net-(U3-~{CTS})">
+      <node ref="TP18" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U3" pin="9" pinfunction="~{CTS}" pintype="input"/>
+    </net>
+    <net code="44" name="Net-(U3-~{DCD})">
+      <node ref="TP21" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U3" pin="12" pinfunction="~{DCD}" pintype="input"/>
+    </net>
+    <net code="45" name="Net-(U3-~{DSR})">
+      <node ref="TP19" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U3" pin="10" pinfunction="~{DSR}" pintype="input"/>
+    </net>
+    <net code="46" name="Net-(U3-~{DTR})">
+      <node ref="TP22" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U3" pin="13" pinfunction="~{DTR}" pintype="output"/>
+    </net>
+    <net code="47" name="Net-(U3-~{RI})">
+      <node ref="TP20" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U3" pin="11" pinfunction="~{RI}" pintype="input"/>
+    </net>
+    <net code="48" name="Net-(U3-~{RTS})">
+      <node ref="TP23" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U3" pin="14" pinfunction="~{RTS}" pintype="output"/>
+    </net>
+    <net code="49" name="unconnected-(U1-NC-Pad32)">
+      <node ref="U1" pin="32" pinfunction="NC" pintype="no_connect"/>
+    </net>
+  </nets>
+</export>

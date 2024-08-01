@@ -112,19 +112,22 @@ def handle_request(conn):
     component_name = ''
     component_image_url = ''
     component_characteristics = ''
-
-    if detected_component == 9:    
+    
+    debug('Detected component: {0}'.format(detected_component))
+    
+    if detected_component & 8:    
         component_name = diode_component.get_name()
         component_image_url = diode_component.get_image()
         component_characteristics = diode_component.get_data()
+    elif detected_component & 3 or detected_component == 7:
+        component_name = capacitor_component.get_name()
+        component_image_url = capacitor_component.get_image()
+        component_characteristics = capacitor_component.get_data()
+        print(component_characteristics)
     elif detected_component == 1:
         component_name = resistor_component.get_name()
         component_image_url = resistor_component.get_image()
         component_characteristics = resistor_component.get_data()
-    elif detected_component == 2:
-        component_name = capacitor_component.get_name()
-        component_image_url = capacitor_component.get_image()
-        component_characteristics = capacitor_component.get_data()
     elif detected_component == 5:
         component_name = inductor_component.get_name()
         component_image_url = inductor_component.get_image()
@@ -341,13 +344,22 @@ def capacitor_discharge(tp_x, tp_y):
     
     max_count_discharge = 64
     discharge_index = 0
-
+    
+    not_charging_voltage = 0
+    
     while tp_x.get_v() > 0.16 or tp_y.get_v() > 0.16:
         sleep(0.2)
         
         debug('Discharging status: TP X: {0}, TP Y: {1}'.format(tp_x.get_v(), tp_y.get_v()))
         discharge_index+=1
         
+        if discharge_index == 100:
+            not_charging_voltage = tp_x.get_v() + tp_y.get_v()
+        if discharge_index == 200:
+            temp_v = tp_x.get_v() + tp_y.get_v()
+            if not_charging_voltage < temp_v - 0.05:
+                debug('Discharge failed. Exiting...')
+                return -1
         if discharge_index > max_count_discharge:
             debug('Discharge failed. Exiting...')
             return -1
@@ -406,6 +418,60 @@ def capacitor_charge(tp_x, tp_y):
     
     return -1
 
+def measure_capacitor_esr(tp_x, tp_y):
+
+    rc = capacitor_discharge(tp_x, tp_y)
+
+    u_c = 0        
+    u_l = 0  
+    u_h = 0  
+
+    # Discharge the capacitor
+    tp_x.set_r0_low()
+
+    for i in range(0, 10):
+        t_u_c = 0
+        t_u_h = 0
+        t_u_l = 0
+
+        for j in range(0, 100):
+            tp_y.set_r1_high()
+            t_u_h = t_u_h + tp_y.get_v()
+            sleep_us(4)
+            tp_y.set_r1_low()
+            sleep_us(4)
+            t_u_l = t_u_l + tp_x.get_v() - 0.14
+            # print(t_u_l)
+            tp_y.set_r1_floating()
+            t_u_c = t_u_c + tp_y.get_v()
+
+        u_c = t_u_c/100 + u_c
+        u_l = t_u_l/100 + u_l
+        u_h = t_u_h/100 + u_h
+
+        tp_y.set_r1_low()
+        sleep_ms(5)
+
+    u_c = u_c / 10
+    u_l = u_l / 10
+    u_h = u_h / 10
+
+    # u_l = u_l - 1.4
+    # u_l = 3.04 - u_h - u_c
+    debug('Uc: {0}, Ul: {1}, Uh: {2}'.format(u_c, u_l, u_h))
+
+    u_diff = u_h - u_l
+    u_esr = u_diff - u_c
+
+    esr = u_esr * 680 / u_l
+    esr = esr / 1000000
+
+    return esr
+
+def compute_q_factor(capacitance, esr, frequency):
+    # remember units of measurement
+    return 1000000 / (2 * math.pi * frequency * capacitance * esr)
+
 def measure_capacitance_test(tp_x, tp_y):
     global capacitor_component
     global detected_component
@@ -431,13 +497,27 @@ def measure_capacitance_test(tp_x, tp_y):
     
     detected_component = detected_component | 2
     capacitance = rc / 680 * 1000 # capacitance in uF
+
+    esr = measure_capacitor_esr(tp_x, tp_y)
+
     capacitor_component = Capacitor(capacitance)
+    capacitor_component.set_esr(esr)
+    q_factor = compute_q_factor(capacitance, esr, 100000)
+
+    q_factor = round(q_factor, 3)
+    
+    capacitor_component.set_qf(q_factor)
+    capacitor_component.set_df(1/q_factor)
+    capacitor_component.update_data()
+
     debug('Capacitance: {0} uF'.format(capacitance))
+    debug('Capacitor ESR: {0} R'.format(esr))
+    debug('Capacitor Q factor: {0}'.format(q_factor))
 
 def measure_capacitance():
     global tp1, tp2, tp3
     measure_capacitance_test(tp1, tp2)
-    measure_capacitance_test(tp2, tp1)
+    #measure_capacitance_test(tp2, tp1)
 
 def inductor_discharge(tp_x, tp_y):
     # Safety check
@@ -581,11 +661,10 @@ def measure_semiconductors():
     '''
 def measure_phase():
     
-    #measure_inductance()
-    #measure_capacitance()
+    measure_inductance()
+    measure_capacitance()
     measure_semiconductors()
-    #measure_resistance()
-    
+    measure_resistance()
     
 def main():
     global wifi_enabled
@@ -606,6 +685,7 @@ def main():
     debug("\n$ #####################\n$ ## Loop Status: OK ##\n$ #####################\n$ ")
 if __name__ == "__main__":
     main()
+
 
 
 

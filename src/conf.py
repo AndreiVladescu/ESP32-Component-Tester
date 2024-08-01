@@ -226,17 +226,35 @@ class Resistor(Component):
     
 class Capacitor(Component):
     def __init__(self, capacitance = 0):
-        
+        self.esr = 0
+        self.qf = 1
+        self.df = 1
         self.capacitance = capacitance
         name = 'Capacitor'
         image = '<img loading="eager" width="128" height="128" src="https://symbols-electrical.getvecta.com/stencil_229/82_capacitor.4925a40124.svg" alt="Capacitor" title="Capacitor" style="transform: rotate(90deg);">'
-        data = 'Capacitance: {capacitance} uF'
-        data = data.replace('{capacitance}', str(capacitance))
+        data = 'Capacitance: {capacitance} uF <br>ESR: {esr} Ω <br>Q factor: {qf} <br>D factor: {df}'
+
         super().__init__(name, image, data)
 
     def get_capacitance(self):
         return self.capacitance
     
+    def set_esr(self, esr):
+        self.esr = esr
+    
+    def set_qf(self, qf):
+        self.qf = qf
+
+    def set_df(self, df):
+        self.df = df
+        
+    def update_data(self):
+        self.data = 'Capacitance: {capacitance} uF <br>ESR: {esr} Ω <br>Q factor: {qf} <br>D factor: {df}'
+        self.data = self.data.replace('{capacitance}', str(self.capacitance))
+        self.data = self.data.replace('{esr}', str(self.esr))
+        self.data = self.data.replace('{qf}', str(self.qf))
+        self.data = self.data.replace('{df}', str(self.df))
+
 class Diode(Component):
     def __init__(self, forward_voltage = 0, flow_direction = [0, 0]):
         self.forward_voltage = forward_voltage
