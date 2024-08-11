@@ -275,8 +275,9 @@ class Inductor(Component):
         name = 'Inductor'
         self.qf = 1
         self.df = 1
+        self.resistance = 0
         image = '<img loading="eager" width="128" height="128" src="https://symbols-electrical.getvecta.com/stencil_229/83_inductor.abada104a4.svg" alt="Inductor" title="Inductor" style="transform: rotate(90deg);">'
-        data = 'Inductance: {capacitance} mH <br>Q factor: {qf} <br>D factor: {df}'
+        data = 'Inductance: {inductance} mH <br>Resistance: {resistance} Ω <br>Q factor: {qf} <br>D factor: {df}'
 
         super().__init__(name, image, data)
 
@@ -289,8 +290,12 @@ class Inductor(Component):
     def set_df(self, df):
         self.df = df
 
+    def set_resistance(self, resistance):
+        self.resistance = resistance
+
     def update_data(self):
-        self.data = 'Inductance: {inductance} mH <br>Q factor: {qf} <br>D factor: {df}'
+        data = 'Inductance: {inductance} mH <br>Resistance: {resistance} Ω <br>Q factor: {qf} <br>D factor: {df}'
         self.data = self.data.replace('{inductance}', str(self.inductance))
         self.data = self.data.replace('{qf}', str(self.qf))
         self.data = self.data.replace('{df}', str(self.df))
+        self.data = self.data.replace('{resistance}', str(self.resistance))

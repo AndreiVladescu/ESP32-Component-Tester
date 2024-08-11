@@ -119,7 +119,7 @@ def handle_request(conn):
         component_name = diode_component.get_name()
         component_image_url = diode_component.get_image()
         component_characteristics = diode_component.get_data()
-    elif detected_component & 3 or detected_component == 7:
+    elif detected_component == 3 or detected_component == 7:
         component_name = capacitor_component.get_name()
         component_image_url = capacitor_component.get_image()
         component_characteristics = capacitor_component.get_data()
@@ -128,7 +128,7 @@ def handle_request(conn):
         component_name = resistor_component.get_name()
         component_image_url = resistor_component.get_image()
         component_characteristics = resistor_component.get_data()
-    elif detected_component == 5:
+    elif detected_component & 5:
         component_name = inductor_component.get_name()
         component_image_url = inductor_component.get_image()
         component_characteristics = inductor_component.get_data()
@@ -468,9 +468,14 @@ def measure_capacitor_esr(tp_x, tp_y):
 
     return esr
 
-def compute_q_factor(capacitance, esr, frequency):
+def compute_c_q_factor(capacitance, esr, frequency):
     # remember units of measurement
     return 1000000 / (2 * math.pi * frequency * capacitance * esr)
+
+def compute_i_q_factor(inductance, resistance, frequency):
+    # remember units of measurement
+    return 2 * math.pi * frequency * inductance / resistance
+
 
 def measure_capacitance_test(tp_x, tp_y):
     global capacitor_component
@@ -502,7 +507,7 @@ def measure_capacitance_test(tp_x, tp_y):
 
     capacitor_component = Capacitor(capacitance)
     capacitor_component.set_esr(esr)
-    q_factor = compute_q_factor(capacitance, esr, 100000)
+    q_factor = compute_c_q_factor(capacitance, esr, 100000)
 
     q_factor = round(q_factor, 3)
     
@@ -578,6 +583,14 @@ def measure_inductance_test(tp_x, tp_y):
 
     inductor_component = Inductor(inductance)
     debug('Inductance: {0} mH'.format(inductance))
+
+    q_factor = compute_i_q_factor(inductance/1000, 680, 10000)
+    debug(f'Inductor Q factor: {q_factor}')
+    inductor_component.set_qf(q_factor)
+    inductor_component.set_df(1/q_factor)
+    inductor_component.set_resistance(resistor_component.get_resistance())
+    debug(f'Inductor Resistance: {resistor_component.get_resistance()}')
+    inductor_component.update_data()
 
 def measure_inductance():
     global tp1, tp2, tp3
@@ -660,11 +673,11 @@ def measure_semiconductors():
         debug('Diode not detected at {0} and {1}'.format(flow_direction[1], flow_direction[0]))
     '''
 def measure_phase():
-    
-    measure_inductance()
+        
+    measure_resistance()
+    #measure_inductance()
     measure_capacitance()
     measure_semiconductors()
-    measure_resistance()
     
 def main():
     global wifi_enabled
